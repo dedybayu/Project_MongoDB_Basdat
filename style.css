@@ -5,50 +5,59 @@ body {
     background-color: #e3f1f7;
 }
 
+/* Navbar */
 .navbar {
-    background-color: #253342;
-    color: white;
-    padding: 15px 20px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #253342; /* Warna latar belakang navbar */
+    color: white; /* Warna teks default */
+    padding: 15px 20px; /* Spasi di dalam navbar */
+    position: fixed; /* Navbar tetap di atas */
+    top: 0; /* Tetap di bagian atas halaman */
+    width: 100%; /* Lebar penuh */
+    z-index: 100; /* Pastikan di atas elemen lainnya */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Efek bayangan */
 }
 
+/* Kontainer untuk isi navbar */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex; /* Gunakan Flexbox untuk tata letak */
+    justify-content: space-between; /* Elemen kiri dan kanan berjauhan */
+    align-items: center; /* Vertikal sejajar tengah */
+    width: 100%; /* Gunakan lebar penuh */
 }
 
+/* Brand pada navbar */
+.navbar-brand {
+    margin: 0; /* Hilangkan margin default */
+    padding: 0; /* Hilangkan padding default */
+    font-weight: bold; /* Teks tebal */
+    font-size: 1.5rem; /* Ukuran font */
+    color: white; /* Warna teks */
+    text-decoration: none; /* Hilangkan garis bawah */
+    flex-grow: 0; /* Pastikan tetap di kiri */
+}
+
+/* Daftar link di navbar */
 .navbar-links {
-    list-style: none;
-    display: flex;
+    list-style: none; /* Hilangkan bullet */
+    display: flex; /* Tampilan horizontal */
+    margin: 0;
+    padding: 0;
+    flex-grow: 0; /* Pastikan tetap di kanan */
 }
 
 .navbar-links li {
-    margin-left: 30px;
+    margin: 0 10px; /* Jarak antar link */
 }
 
 .navbar-links a {
-    text-decoration: none;
-    color: #f8f8f8;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: #f8f8f8; /* Warna teks link */
+    font-size: 1.1rem; /* Ukuran font */
+    transition: color 0.3s ease; /* Efek transisi pada hover */
 }
 
 .navbar-links a:hover {
-    color: #4d7ca8;
-}
-
-.navbar-brand {
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
+    color: #4d7ca8; /* Warna teks saat hover */
 }
 
 .sidebar-links .submenu {
@@ -103,7 +112,7 @@ body {
     width: 250px;
     height: 100vh;
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0;
     padding-top: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
