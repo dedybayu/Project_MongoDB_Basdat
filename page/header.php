@@ -48,6 +48,11 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     <li><a href="#" class="text-decoration-none">Teknologi</a></li>
                     <li><a href="#" class="text-decoration-none">Politik</a></li>
                     <li><a href="#" class="text-decoration-none">Pendidikan</a></li>
+                    <li><a href="#" class="text-decoration-none">Kesehatan</a></li>
+                    <li><a href="#" class="text-decoration-none">Hiburan</a></li>
+                    <li><a href="#" class="text-decoration-none">Olahraga</a></li>
+                    <li><a href="#" class="text-decoration-none">Kriminal</a></li>
+                    <li><a href="#" class="text-decoration-none">Lingkungan</a></li>
                 </ul>
             </li>
             <li><a href="admin/login.php">Login</a></li>
@@ -56,7 +61,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
 
     <script>
         // Menangani klik tombol toggle pada sidebar
-        document.querySelector('.toggle-sidebar').addEventListener('click', function () {
+        document.querySelector('.toggle-sidebar').addEventListener('click', function() {
             document.querySelector('.sidebar').classList.toggle('open');
         });
     </script>

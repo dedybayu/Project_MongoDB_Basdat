@@ -65,8 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <select name="category" id="category" class="form-control" required>
                     <option value="" disabled selected>-- Pilih Kategori --</option>
                     <option value="Teknologi" <?php echo isset($article['category']) && $article['category'] == 'Teknologi' ? 'selected' : ''; ?>>Teknologi</option>
-                    <option value="Politik" <?php echo isset($article['category']) && $article['category'] == 'Hiburan' ? 'selected' : ''; ?>>Politik</option>
-                    <option value="Pendidikan" <?php echo isset($article['category']) && $article['category'] == 'Olahraga' ? 'selected' : ''; ?>>Pendidikan</option>
+                    <option value="Politik" <?php echo isset($article['category']) && $article['category'] == 'Politik' ? 'selected' : ''; ?>>Politik</option>
+                    <option value="Pendidikan" <?php echo isset($article['category']) && $article['category'] == 'Pendidikan' ? 'selected' : ''; ?>>Pendidikan</option>
+                    <option value="Kesehatan" <?php echo isset($article['category']) && $article['category'] == 'Kesehatan' ? 'selected' : ''; ?>>Kesehatan</option>
+                    <option value="Hiburan" <?php echo isset($article['category']) && $article['category'] == 'Hiburan' ? 'selected' : ''; ?>>Hiburan</option>
+                    <option value="Olahraga" <?php echo isset($article['category']) && $article['category'] == 'Olahraga' ? 'selected' : ''; ?>>Olahraga</option>
+                    <option value="Kriminal" <?php echo isset($article['category']) && $article['category'] == 'Kriminal' ? 'selected' : ''; ?>>Kriminal</option>
+                    <option value="Lingkungan" <?php echo isset($article['category']) && $article['category'] == 'Lingkungan' ? 'selected' : ''; ?>>Lingkungan</option>
                 </select>
             </div>
             <div class="form-group">
