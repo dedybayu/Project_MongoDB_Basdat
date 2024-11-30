@@ -60,9 +60,3 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
             document.querySelector('.sidebar').classList.toggle('open');
         });
     </script>
-
-    <div class="container">
-        <h1 class="my-4">Berita Terkini</h1>
-        <form action="search.php" method="get" class="mb-4">
-            <input type="text" name="q" class="form-control" placeholder="Cari berita...">
-        </form>

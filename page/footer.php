@@ -1,18 +1,4 @@
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Pilih semua tautan kategori yang memiliki kelas 'category-link'
-        const categoryLinks = document.querySelectorAll('.category-link');
 
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); // Mencegah default aksi tautan
-                const parentLi = link.parentElement; // Ambil elemen <li> induk
-                parentLi.classList.toggle('open'); // Menambahkan / menghapus kelas 'open'
-            });
-        });
-    });
-</script>
 <!-- Footer -->
 <div class="footer">
     &copy; 2024 Berita.com. All Rights Reserved
