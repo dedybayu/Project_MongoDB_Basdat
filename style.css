@@ -242,3 +242,22 @@ h1.my-4 {
 }
 
 
+.caret {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg); /* Arah panah ke kanan */
+    transition: transform 0.3s;
+}
+
+.category-link[aria-expanded="true"] .caret {
+    transform: rotate(-135deg); /* Arah panah ke bawah */
+}
+.icon i {
+    transition: transform 0.3s; /* Animasi putar panah */
+}
+
+.category-link[aria-expanded="true"] .icon i {
+    transform: rotate(180deg); /* Rotasi panah ke atas */
+}
