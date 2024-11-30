@@ -27,39 +27,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Berita</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
+
 <body>
-<div class="container">
-    <h1 class="my-4">Tambah Berita</h1>
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="title">Judul</label>
-            <input type="text" name="title" id="title" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="content">Konten</label>
-            <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="summary">Ringkasan</label>
-            <textarea name="summary" id="summary" class="form-control" rows="2" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="category">Kategori</label>
-            <input type="text" name="category" id="category" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="author">Penulis</label>
-            <input type="text" name="author" id="author" class="form-control" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
-</div>
+    <div class="container">
+        <h1 class="my-4">Tambah Berita</h1>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="title">Judul</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Konten</label>
+                <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="summary">Ringkasan</label>
+                <textarea name="summary" id="summary" class="form-control" rows="2" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Kategori</label>
+                <select name="category" id="category" class="form-control" required>
+                    <option value="" disabled selected>-- Pilih Kategori --</option>
+                    <option value="Teknologi" <?php echo isset($article['category']) && $article['category'] == 'Teknologi' ? 'selected' : ''; ?>>Teknologi</option>
+                    <option value="Politik" <?php echo isset($article['category']) && $article['category'] == 'Hiburan' ? 'selected' : ''; ?>>Politik</option>
+                    <option value="Pendidikan" <?php echo isset($article['category']) && $article['category'] == 'Olahraga' ? 'selected' : ''; ?>>Pendidikan</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="author">Penulis</label>
+                <input type="text" name="author" id="author" class="form-control" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
 </body>
+
 </html>
