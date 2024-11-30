@@ -3,7 +3,6 @@ require 'config/database.php';
 $id = new MongoDB\BSON\ObjectId($_GET['id']);
 $article = $newsCollection->findOne(['_id' => $id]);
 include 'page/header.php';
-include 'page/sidebar.php';
 ?>
 
 
