@@ -7,58 +7,113 @@ body {
 
 /* Navbar */
 .navbar {
-    background-color: #253342; /* Warna latar belakang navbar */
-    color: white; /* Warna teks default */
-    padding: 15px 20px; /* Spasi di dalam navbar */
-    position: fixed; /* Navbar tetap di atas */
-    top: 0; /* Tetap di bagian atas halaman */
-    width: 100%; /* Lebar penuh */
-    z-index: 100; /* Pastikan di atas elemen lainnya */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Efek bayangan */
+    background-color: #253342;
+    color: white;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 /* Kontainer untuk isi navbar */
 .navbar-container {
-    display: flex; /* Gunakan Flexbox untuk tata letak */
-    justify-content: space-between; /* Elemen kiri dan kanan berjauhan */
-    align-items: center; /* Vertikal sejajar tengah */
-    width: 100%; /* Gunakan lebar penuh */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 /* Brand pada navbar */
 .navbar-brand {
-    margin: 0; /* Hilangkan margin default */
-    padding: 0; /* Hilangkan padding default */
-    font-weight: bold; /* Teks tebal */
-    font-size: 1.5rem; /* Ukuran font */
-    color: white; /* Warna teks */
-    text-decoration: none; /* Hilangkan garis bawah */
-    flex-grow: 0; /* Pastikan tetap di kiri */
-}
-
-/* Daftar link di navbar */
-.navbar-links {
-    list-style: none; /* Hilangkan bullet */
-    display: flex; /* Tampilan horizontal */
     margin: 0;
     padding: 0;
-    flex-grow: 0; /* Pastikan tetap di kanan */
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    order: 2; /* Menempatkan brand ke kanan */
 }
 
-.navbar-links li {
-    margin: 0 10px; /* Jarak antar link */
+/* Hamburger menu (tiga garis) */
+.hamburger-menu {
+    display: none; /* Sembunyikan hamburger menu pada layar besar */
+    flex-direction: column; /* Garis-garis vertikal */
+    justify-content: space-between;
+    width: 30px; /* Lebar hamburger menu */
+    height: 21px; /* Tinggi hamburger menu */
 }
 
-.navbar-links a {
-    text-decoration: none; /* Hilangkan garis bawah */
-    color: #f8f8f8; /* Warna teks link */
-    font-size: 1.1rem; /* Ukuran font */
-    transition: color 0.3s ease; /* Efek transisi pada hover */
+.hamburger-menu .line {
+    background-color: white;
+    height: 3px; /* Ketebalan garis */
+    width: 100%;
 }
 
-.navbar-links a:hover {
-    color: #4d7ca8; /* Warna teks saat hover */
+/* Menampilkan hamburger menu pada layar kecil */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex; /* Menampilkan hamburger menu pada layar kecil */
+    }
+
+    /* Pindahkan brand ke kanan dan sembunyikan teks saat hamburger menu muncul */
+    .navbar-brand {
+        font-size: 1.5rem;
+        order: 1; /* Memindahkan brand ke kanan */
+    }
+
+    /* Menampilkan tombol toggle pada layar kecil */
+    .toggle-sidebar {
+        display: block; /* Menampilkan tombol pada layar kecil */
+    }
+
+    /* Menyembunyikan brand pada layar kecil */
+    .navbar-brand {
+        font-size: 0; /* Menyembunyikan teks brand saat tombol toggle muncul */
+    }
+    .navbar {
+        padding: 22px 20px;
+    }
 }
+
+/* Menyembunyikan sidebar pada layar kecil */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%); /* Menyembunyikan sidebar di luar layar */
+        transition: transform 0.3s ease; /* Efek transisi saat membuka/tutup */
+    }
+
+    .sidebar.open {
+        transform: translateX(0); /* Menampilkan sidebar saat kelas 'open' ditambahkan */
+    }
+
+    /* Menampilkan tombol toggle pada layar kecil */
+    .toggle-sidebar {
+        display: block; /* Menampilkan tombol pada layar kecil */
+    }
+
+    .navbar-container {
+        justify-content: space-between; /* Memastikan navbar tetap rapi */
+    }
+}
+
+/* Sidebar tetap terlihat di layar besar */
+@media (min-width: 769px) {
+    .sidebar {
+        transform: translateX(0); /* Menampilkan sidebar pada layar besar */
+    }
+
+    .toggle-sidebar {
+        display: none; /* Menyembunyikan tombol toggle pada layar besar */
+    }
+}
+
+
+
+
 
 .sidebar-links .submenu {
     list-style: none;
@@ -112,7 +167,7 @@ body {
     width: 250px;
     height: 100vh;
     position: fixed;
-    top: 60px;
+    top: 70px;
     left: 0;
     padding-top: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);

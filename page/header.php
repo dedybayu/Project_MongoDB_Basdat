@@ -16,14 +16,20 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
 
 <body>
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
+            <a href="#" class="navbar-brand toggle-sidebar">
+                <div class="hamburger-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </a>
             <a href="#" class="navbar-brand">Berita.com</a>
-            <ul class="navbar-links">
-                <li><a href="admin/login.php">Login</a></li>
-            </ul>
         </div>
     </nav>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -35,7 +41,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     data-bs-toggle="collapse" aria-expanded="false">
                     Kategori
                     <span class="icon">
-                        <i class="fa fa-chevron-down"></i> <!-- Panah ke bawah -->
+                        <i class="fa fa-chevron-down"></i>
                     </span>
                 </a>
                 <ul class="collapse list-unstyled ms-3" id="submenuKategori">
@@ -44,8 +50,16 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     <li><a href="#" class="text-decoration-none">Pendidikan</a></li>
                 </ul>
             </li>
+            <li><a href="admin/login.php">Login</a></li>
         </ul>
     </div>
+
+    <script>
+        // Menangani klik tombol toggle pada sidebar
+        document.querySelector('.toggle-sidebar').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
 
     <div class="container">
         <h1 class="my-4">Berita Terkini</h1>
