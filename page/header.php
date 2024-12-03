@@ -53,6 +53,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     <li><a href="#" class="text-decoration-none">Olahraga</a></li>
                     <li><a href="#" class="text-decoration-none">Kriminal</a></li>
                     <li><a href="#" class="text-decoration-none">Lingkungan</a></li>
+                    <li><a href="#" class="text-decoration-none">Lainnya</a></li>
                 </ul>
             </li>
             <li><a href="admin/login.php">Login</a></li>

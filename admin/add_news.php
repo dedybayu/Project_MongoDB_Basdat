@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <option value="Olahraga" <?php echo isset($article['category']) && $article['category'] == 'Olahraga' ? 'selected' : ''; ?>>Olahraga</option>
                     <option value="Kriminal" <?php echo isset($article['category']) && $article['category'] == 'Kriminal' ? 'selected' : ''; ?>>Kriminal</option>
                     <option value="Lingkungan" <?php echo isset($article['category']) && $article['category'] == 'Lingkungan' ? 'selected' : ''; ?>>Lingkungan</option>
+                     <option value="Lainnya" <?php echo isset($article['category']) && $article['category'] == 'Lainnya' ? 'selected' : ''; ?>>Lainnya</option>
                 </select>
             </div>
 
