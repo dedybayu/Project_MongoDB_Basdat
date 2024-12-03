@@ -31,7 +31,7 @@ include 'page/header.php';
             echo "<p>Tidak ada berita untuk kategori ini.</p>";
         } else {
             foreach ($newsArray as $article): ?>
-                <a href="news_detail.php?id=<?= $article['_id'] ?>" class="list-group-item">
+                <a href="view_detail.php?id=<?= $article['_id'] ?>" class="list-group-item">
                     <h5><?= $article['title'] ?></h5>
                     <p><?= $article['summary'] ?></p>
                     <small>Create at: <?php
@@ -46,6 +46,7 @@ include 'page/header.php';
                     echo $updatedAt->format('d-m-Y H:i');
                     ?></small>
                 </a>
+
             <?php endforeach;
         }
         ?>
