@@ -34,28 +34,10 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
     <!-- Sidebar -->
     <div class="sidebar">
         <ul class="sidebar-links list-unstyled">
-            <li><a href="index.php" class="text-decoration-none">Dashboard</a></li>
-            <li class="category">
-                <a href="#submenuKategori"
-                    class="category-link text-decoration-none d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" aria-expanded="false">
-                    Kategori
-                    <span class="icon">
-                        <i class="fa fa-chevron-down"></i>
-                    </span>
-                </a>
-                <ul class="collapse list-unstyled ms-3" id="submenuKategori">
-                    <li><a href="#" class="text-decoration-none">Teknologi</a></li>
-                    <li><a href="#" class="text-decoration-none">Politik</a></li>
-                    <li><a href="#" class="text-decoration-none">Pendidikan</a></li>
-                    <li><a href="#" class="text-decoration-none">Kesehatan</a></li>
-                    <li><a href="#" class="text-decoration-none">Hiburan</a></li>
-                    <li><a href="#" class="text-decoration-none">Olahraga</a></li>
-                    <li><a href="#" class="text-decoration-none">Kriminal</a></li>
-                    <li><a href="#" class="text-decoration-none">Lingkungan</a></li>
-                </ul>
-            </li>
-            <li><a href="admin/login.php">Login</a></li>
+            <li><a href="dashboard.php" class="text-decoration-none">Dashboard</a></li>
+            <li><a href="add_news.php" class="text-decoration-none">Tambah Berita</a></li>
+            <li><a href="manage_news.php" class="text-decoration-none">Kelola Berita</a></li>
+            <li><a href="admin/login.php">Logout</a></li>
         </ul>
     </div>
 

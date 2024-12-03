@@ -25,17 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require '../config/auth.php'; // Pastikan admin login
+include 'page/header.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Berita</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-</head>
-
-<body>
+?>
     <div class="container">
         <h1 class="my-4">Tambah Berita</h1>
         <form action="" method="post">
@@ -75,6 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
-</body>
-
-</html>
+<?php
+include 'page/footer.php';
+?>
