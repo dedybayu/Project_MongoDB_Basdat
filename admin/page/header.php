@@ -16,7 +16,6 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
 
 <body>
     <!-- Navbar -->
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
             <a href="#" class="navbar-brand toggle-sidebar">
@@ -26,7 +25,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     <div class="line"></div>
                 </div>
             </a>
-            <a href="#" class="navbar-brand">Berita.com</a>
+            <a href="#" class="navbar-brand">KataData</a>
         </div>
     </nav>
 

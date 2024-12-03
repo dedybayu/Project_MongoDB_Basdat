@@ -1,7 +1,6 @@
 <?php
 require '../config/auth.php'; // Pastikan admin login
 include 'page/header.php';
-
 ?>
 
 <div class="container">

@@ -26,7 +26,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     <div class="line"></div>
                 </div>
             </a>
-            <a href="#" class="navbar-brand">Berita.com</a>
+            <a href="#" class="navbar-brand">KataData</a>
         </div>
     </nav>
 
