@@ -31,19 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: manage_news.php');
     exit;
 }
+
+include 'page/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Berita</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-</head>
-
-<body>
     <div class="container">
         <h1 class="my-4">Edit Berita</h1>
 
@@ -83,6 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         </form>
     </div>
-</body>
-
-</html>
+<?php
+include 'page/footer.php';
+?>
