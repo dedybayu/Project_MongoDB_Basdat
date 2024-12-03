@@ -5,6 +5,7 @@ body {
     background-color: #e3f1f7;
 }
 
+
 /* Navbar */
 .navbar {
     background-color: #253342;
@@ -35,45 +36,56 @@ body {
     flex-grow: 0;
     display: flex;
     align-items: center;
-    order: 2; /* Menempatkan brand ke kanan */
+    order: 2;
+    /* Menempatkan brand ke kanan */
 }
 
 /* Hamburger menu (tiga garis) */
 .hamburger-menu {
-    display: none; /* Sembunyikan hamburger menu pada layar besar */
-    flex-direction: column; /* Garis-garis vertikal */
+    display: none;
+    /* Sembunyikan hamburger menu pada layar besar */
+    flex-direction: column;
+    /* Garis-garis vertikal */
     justify-content: space-between;
-    width: 30px; /* Lebar hamburger menu */
-    height: 21px; /* Tinggi hamburger menu */
+    width: 30px;
+    /* Lebar hamburger menu */
+    height: 21px;
+    /* Tinggi hamburger menu */
 }
 
 .hamburger-menu .line {
     background-color: white;
-    height: 3px; /* Ketebalan garis */
+    height: 3px;
+    /* Ketebalan garis */
     width: 100%;
 }
 
 /* Menampilkan hamburger menu pada layar kecil */
 @media (max-width: 768px) {
     .hamburger-menu {
-        display: flex; /* Menampilkan hamburger menu pada layar kecil */
+        display: flex;
+        /* Menampilkan hamburger menu pada layar kecil */
     }
 
     /* Pindahkan brand ke kanan dan sembunyikan teks saat hamburger menu muncul */
     .navbar-brand {
         font-size: 1.5rem;
-        order: 1; /* Memindahkan brand ke kanan */
+        order: 1;
+        /* Memindahkan brand ke kanan */
     }
 
     /* Menampilkan tombol toggle pada layar kecil */
     .toggle-sidebar {
-        display: block; /* Menampilkan tombol pada layar kecil */
+        display: block;
+        /* Menampilkan tombol pada layar kecil */
     }
 
     /* Menyembunyikan brand pada layar kecil */
     .navbar-brand {
-        font-size: 0; /* Menyembunyikan teks brand saat tombol toggle muncul */
+        font-size: 0;
+        /* Menyembunyikan teks brand saat tombol toggle muncul */
     }
+
     .navbar {
         padding: 22px 20px;
     }
@@ -82,22 +94,28 @@ body {
 /* Menyembunyikan sidebar pada layar kecil */
 @media (max-width: 768px) {
     .sidebar {
-        transform: translateX(-100%); /* Menyembunyikan sidebar di luar layar */
-        transition: transform 0.3s ease; /* Efek transisi saat membuka/tutup */
+        transform: translateX(-100%);
+        /* Menyembunyikan sidebar di luar layar */
+        transition: transform 0.3s ease;
+        /* Efek transisi saat membuka/tutup */
     }
 
     .sidebar.open {
-        transform: translateX(0); /* Menampilkan sidebar saat kelas 'open' ditambahkan */
+        transform: translateX(0);
+        /* Menampilkan sidebar saat kelas 'open' ditambahkan */
     }
 
     /* Menampilkan tombol toggle pada layar kecil */
     .toggle-sidebar {
-        display: block; /* Menampilkan tombol pada layar kecil */
+        display: block;
+        /* Menampilkan tombol pada layar kecil */
     }
 
     .navbar-container {
-        justify-content: space-between; /* Memastikan navbar tetap rapi */
+        justify-content: space-between;
+        /* Memastikan navbar tetap rapi */
     }
+
     .container {
         padding: 0px;
         padding-top: 0px;
@@ -107,11 +125,13 @@ body {
 /* Sidebar tetap terlihat di layar besar */
 @media (min-width: 769px) {
     .sidebar {
-        transform: translateX(0); /* Menampilkan sidebar pada layar besar */
+        transform: translateX(0);
+        /* Menampilkan sidebar pada layar besar */
     }
 
     .toggle-sidebar {
-        display: none; /* Menyembunyikan tombol toggle pada layar besar */
+        display: none;
+        /* Menyembunyikan tombol toggle pada layar besar */
     }
 }
 
@@ -179,7 +199,7 @@ body {
     height: 100vh;
     /* Memastikan sidebar mengambil seluruh tinggi layar */
     overflow-y: auto;
-       
+
 }
 
 .sidebar-links {
@@ -217,12 +237,19 @@ body {
 }
 
 .list-group-item {
+    margin: auto;
+    width: 100%;
     background-color: #fff;
     margin-bottom: 15px;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+}
+
+.form-control {
+    width: 100%;
+    margin: auto;
 }
 
 .list-group-item:hover {
@@ -319,17 +346,22 @@ h1.my-4 {
     border-width: 0 2px 2px 0;
     display: inline-block;
     padding: 3px;
-    transform: rotate(45deg); /* Arah panah ke kanan */
+    transform: rotate(45deg);
+    /* Arah panah ke kanan */
     transition: transform 0.3s;
 }
 
 .category-link[aria-expanded="true"] .caret {
-    transform: rotate(-135deg); /* Arah panah ke bawah */
+    transform: rotate(-135deg);
+    /* Arah panah ke bawah */
 }
+
 .icon i {
-    transition: transform 0.3s; /* Animasi putar panah */
+    transition: transform 0.3s;
+    /* Animasi putar panah */
 }
 
 .category-link[aria-expanded="true"] .icon i {
-    transform: rotate(180deg); /* Rotasi panah ke atas */
+    transform: rotate(180deg);
+    /* Rotasi panah ke atas */
 }
