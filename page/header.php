@@ -45,16 +45,16 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                     </span>
                 </a>
                 <ul class="collapse list-unstyled ms-3" id="submenuKategori">
-                    <li><a href="#" class="text-decoration-none">Teknologi</a></li>
-                    <li><a href="#" class="text-decoration-none">Politik</a></li>
-                    <li><a href="#" class="text-decoration-none">Pendidikan</a></li>
-                    <li><a href="#" class="text-decoration-none">Kesehatan</a></li>
-                    <li><a href="#" class="text-decoration-none">Hiburan</a></li>
-                    <li><a href="#" class="text-decoration-none">Olahraga</a></li>
-                    <li><a href="#" class="text-decoration-none">Kriminal</a></li>
-                    <li><a href="#" class="text-decoration-none">Lingkungan</a></li>
-                    <li><a href="#" class="text-decoration-none">Lainnya</a></li>
-                </ul>
+                <li><a href="view_kategori.php?category=Teknologi" class="text-decoration-none">Teknologi</a></li>
+                <li><a href="view_kategori.php?category=Politik" class="text-decoration-none">Politik</a></li>
+                <li><a href="view_kategori.php?category=Pendidikan" class="text-decoration-none">Pendidikan</a></li>
+                <li><a href="view_kategori.php?category=Kesehatan" class="text-decoration-none">Kesehatan</a></li>
+                <li><a href="view_kategori.php?category=Hiburan" class="text-decoration-none">Hiburan</a></li>
+                <li><a href="view_kategori.php?category=Olahraga" class="text-decoration-none">Olahraga</a></li>
+                <li><a href="view_kategori.php?category=Kriminal" class="text-decoration-none">Kriminal</a></li>
+                <li><a href="view_kategori.php?category=Lingkungan" class="text-decoration-none">Lingkungan</a></li>
+                <li><a href="view_kategori.php?category=Lainnya" class="text-decoration-none">Lainnya</a></li>
+            </ul>
             </li>
             <li><a href="admin/login.php">Login</a></li>
         </ul>
