@@ -1,5 +1,5 @@
 <?php
-require 'config/database.php';
+require '../config/database.php';
 $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
 ?>
 <!DOCTYPE html>
@@ -9,8 +9,8 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita Terkini</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
 
