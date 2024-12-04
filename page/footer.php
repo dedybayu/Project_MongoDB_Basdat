@@ -1,7 +1,12 @@
-
+    <style>
+        .footer span {
+            font-size: 14px;
+            margin-left: -850px;
+        }
+    </style>
 <!-- Footer -->
 <div class="footer">
-    &copy; 2024 Berita.com. All Rights Reserved
+    <span>&copy; 2024 Berita.com. All Rights Reserved</span>
 </div>
 
 <!-- Bootstrap Bundle JS -->
