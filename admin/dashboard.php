@@ -14,24 +14,14 @@ include 'page/header.php';
                 <h5><?= $article['title'] ?></h5>
                 <p><?= $article['summary'] ?></p>
                 <small>Create at: <?php
-                // Ambil waktu yang disimpan di MongoDB (dalam UTC)
                 $createdAt = $article['created_at']->toDateTime();
-
-                // Set zona waktu ke WIB (Asia/Jakarta)
                 $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-
-                // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
                 echo $createdAt->format('d-m-Y H:i');
                 ?></small>
                 <br>
                 <small>Update at: <?php
-                // Ambil waktu yang disimpan di MongoDB (dalam UTC)
                 $createdAt = $article['updated_at']->toDateTime();
-
-                // Set zona waktu ke WIB (Asia/Jakarta)
                 $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-
-                // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
                 echo $createdAt->format('d-m-Y H:i');
                 ?></small>
             </a>
@@ -40,14 +30,13 @@ include 'page/header.php';
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Pilih semua tautan kategori yang memiliki kelas 'category-link'
         const categoryLinks = document.querySelectorAll('.category-link');
 
         categoryLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault(); // Mencegah default aksi tautan
-                const parentLi = link.parentElement; // Ambil elemen <li> induk
-                parentLi.classList.toggle('open'); // Menambahkan / menghapus kelas 'open'
+                e.preventDefault(); 
+                const parentLi = link.parentElement;
+                parentLi.classList.toggle('open');
             });
         });
     });

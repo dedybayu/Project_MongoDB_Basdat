@@ -12,18 +12,12 @@ include 'page/header.php';
     <p><strong>Kategori:</strong> <?= $article['category'] ?></p>
     <p><strong>Diterbitkan:</strong>
         <?php
-        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
         $createdAt = $article['created_at']->toDateTime();
-
-        // Set zona waktu ke WIB (Asia/Jakarta)
         $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-
-        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
         echo $createdAt->format('d-m-Y H:i');
         ?>
     </p>
     <hr>
-    <!-- Konten berita dalam kotak -->
     <div class="content-box">
         <p><?= nl2br($article['content']) ?></p>
     </div>

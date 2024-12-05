@@ -10,7 +10,6 @@ $cursor = $newsCollection->find(
     ['projection' => ['title' => 1, 'summary' => 1, 'created_at' => 1]]
 );
 
-// Ubah cursor menjadi array
 $results = iterator_to_array($cursor);
 
 include 'page/header.php';

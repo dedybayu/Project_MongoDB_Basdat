@@ -1,18 +1,15 @@
 <?php
-require 'config/database.php';  // Pastikan koneksi database sudah di-include
+require 'config/database.php';  
 
-// Menangani kategori yang dipilih dari URL
-$category = isset($_GET['category']) ? $_GET['category'] : null;  // Ambil kategori dari URL
+$category = isset($_GET['category']) ? $_GET['category'] : null;
 
-// Jika kategori dipilih, kita akan memfilter berita berdasarkan kategori tersebut
 $filter = [];
 if ($category) {
-    $filter['category'] = $category;  // Filter berdasarkan kategori
+    $filter['category'] = $category;  
 }
 
-// Ambil berita dari MongoDB, dengan urutan berdasarkan waktu terbaru
 $news = $newsCollection->find($filter, ['sort' => ['created_at' => -1]]);
-$newsArray = iterator_to_array($news); // Mengkonversi cursor ke array untuk mempermudah pengecekan
+$newsArray = iterator_to_array($news); 
 
 include 'page/header.php';
 ?>
@@ -26,7 +23,6 @@ include 'page/header.php';
     
     <div class="list-group">
         <?php
-        // Menampilkan berita yang sesuai kategori
         if (count($newsArray) == 0) {
             echo "<p>Tidak ada berita untuk kategori ini.</p>";
         } else {

@@ -1,8 +1,7 @@
 <?php
-require '../config/auth.php'; // Pastikan admin login
+require '../config/auth.php'; 
 require '../config/database.php';
 
-// Ambil semua berita dari MongoDB dan ubah menjadi array
 $news = iterator_to_array($newsCollection->find([], ['sort' => ['created_at' => -1]]));
 
 include 'page/header.php';

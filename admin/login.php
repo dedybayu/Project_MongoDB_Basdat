@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Cari admin berdasarkan username
     $admin = $db->users->findOne(['username' => $username]);
 
     if ($admin && password_verify($password, $admin['password'])) {
