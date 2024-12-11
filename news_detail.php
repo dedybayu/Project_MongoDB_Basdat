@@ -59,13 +59,16 @@ include 'page/header.php';
     <!-- Display image on top and content below -->
     <div class="content-box mt-0 responsive-content">
         <?php if (isset($article['image'])): ?>
-                <div class="image-box mb-4">
-                    <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                        class="img-fluid" style="max-width: 400px;">
-                </div>
-            <?php endif; ?>
-            <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+            <div class="image-box mb-4">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
+                    style="float: left; max-width: 600px; margin-right: 20px; margin-bottom: 20px;">
+                <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+            </div>
+        <?php endif; ?>
     </div>
+
+
+
 
 
     <br>
