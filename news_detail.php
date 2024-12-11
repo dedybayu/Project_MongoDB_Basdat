@@ -13,11 +13,14 @@ $newsCollection->updateOne(
 // Fetch the article data
 $article = $newsCollection->findOne(['_id' => $id]);
 
-// Ensure you have a valid comments collection
-$commentsCollection = $newsCollection->selectCollection('comments');
+// Access the comments collection from the database
+$commentsCollection = $db->comments; // Correct way to access the 'comments' collection
 
 // Fetch comments for the current article
-$comments = $commentsCollection->find(['id_news' => $id]);
+$commentsCursor = $commentsCollection->find(['id_news' => $id]);
+
+// Convert cursor to an array to avoid 'rewind' issue
+$comments = iterator_to_array($commentsCursor);
 
 // Process comment submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
@@ -40,9 +43,9 @@ include 'page/header.php';
 ?>
 
 <div class="container">
-    <h1 class="my-4"><?= $article['title'] ?></h1>
-    <p><strong>Penulis:</strong> <?= $article['author'] ?></p>
-    <p><strong>Kategori:</strong> <?= $article['category'] ?></p>
+    <h1 class="my-4"><?= htmlspecialchars($article['title']) ?></h1>
+    <p><strong>Penulis:</strong> <?= htmlspecialchars($article['author']) ?></p>
+    <p><strong>Kategori:</strong> <?= htmlspecialchars($article['category']) ?></p>
     <p><strong>Diterbitkan:</strong>
         <?php
         // Format the created_at timestamp to Jakarta timezone
@@ -61,7 +64,7 @@ include 'page/header.php';
     <?php endif; ?>
 
     <div class="content-box">
-        <p><?= nl2br($article['content']) ?></p>
+        <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
     </div>
 
     <!-- Display view count below the content -->
@@ -70,7 +73,7 @@ include 'page/header.php';
     <hr>
     <!-- Display existing comments -->
     <h4>Komentar:</h4>
-    <?php if ($comments->isDead() || iterator_count($comments) == 0): ?>
+    <?php if (count($comments) == 0): ?>
         <p>Belum ada komentar.</p>
     <?php else: ?>
         <?php foreach ($comments as $comment): ?>
@@ -89,11 +92,12 @@ include 'page/header.php';
     <?php endif; ?>
 
     <!-- Comment Form -->
+     <br>
     <h4>Tambahkan Komentar:</h4>
     <form action="" method="post">
         <div class="form-group">
             <textarea name="comment" class="form-control" rows="3" required></textarea>
-        </div>
+        </div><br>
         <button type="submit" class="btn btn-primary">Kirim Komentar</button>
     </form>
 </div>
