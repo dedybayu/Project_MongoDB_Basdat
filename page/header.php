@@ -35,6 +35,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
     <div class="sidebar">
         <ul class="sidebar-links list-unstyled">
             <li><a href="index.php" class="text-decoration-none">Dashboard</a></li>
+            <li><a href="trending.php" class="text-decoration-none">Trending</a></li>
             <li class="category">
                 <a href="#submenuKategori"
                     class="category-link text-decoration-none d-flex justify-content-between align-items-center"
