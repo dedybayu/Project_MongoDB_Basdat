@@ -34,6 +34,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
     <div class="sidebar">
         <ul class="sidebar-links list-unstyled">
             <li><a href="dashboard.php" class="text-decoration-none">Dashboard</a></li>
+            <li><a href="trending.php" class="text-decoration-none">Trending</a></li>
             <li><a href="add_news.php" class="text-decoration-none">Tambah Berita</a></li>
             <li><a href="manage_news.php" class="text-decoration-none">Kelola Berita</a></li>
             <li><a href="change_password" class="text-decoration-none">Ubah Password</a></li>
