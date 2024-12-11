@@ -1,9 +1,8 @@
 
 // Jalankan "use news_app" di termial mongodb
 
-use ('news_app')
+use('news_app');
 
-// BUAT COLLECTION NEWS
 db.createCollection("news", {
     validator: {
         $jsonSchema: {
@@ -36,12 +35,46 @@ db.createCollection("news", {
                 },
                 updated_at: {
                     bsonType: "date",
-                    description: "Update timestamp is required."
+                    description: "Update timestamp is optional."
+                },
+                image: {
+                    bsonType: "binData",
+                    description: "Image is optional and must be binary data."
+                },
+                jumlah_views: {
+                    bsonType: "int",
+                    description: "View count is optional and must be an integer."
                 }
             }
         }
     }
 });
+
+
+// Create COLLECTION COMMENTS
+db.createCollection("comments", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["id_news", "comment"],
+            properties: {
+                id_news: {
+                    bsonType: "objectId",
+                    description: "ID of the related news is required and must be an ObjectId."
+                },
+                comment: {
+                    bsonType: "string",
+                    description: "Comment is required and must be a string."
+                },
+                created_at: {
+                    bsonType: "date",
+                    description: "Creation timestamp is optional and must be a date."
+                }
+            }
+        }
+    }
+});
+
 
 // BUAT COLLECTION USER
 db.createCollection("users", {
@@ -66,3 +99,9 @@ db.createCollection("users", {
         }
     }
 });
+
+
+
+
+
+
