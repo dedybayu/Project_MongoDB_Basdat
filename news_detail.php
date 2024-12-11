@@ -56,8 +56,8 @@ include 'page/header.php';
     </p>
     <hr>
 
-<!-- Display image inside paragraph with content wrapping -->
-<div class="content-box mt-0 responsive-content">
+    <!-- Display image inside paragraph with content wrapping -->
+    <div class="content-box mt-0 responsive-content">
     <?php if (isset($article['image'])): ?>
             <div class="image-text-container">
                 <p class="text-content">
@@ -73,9 +73,25 @@ include 'page/header.php';
 
 
 
-<!-- Tambahkan CSS -->
-<style>
-    .responsive-image {
+
+    <!-- Tambahkan CSS -->
+    <style>
+        .responsive-content {
+    margin-bottom: 20px;
+}
+
+.image-text-container {
+    overflow: hidden;
+    /* Pastikan elemen tidak meluap */
+}
+
+.text-content {
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
+
+.responsive-image {
     float: left;
     margin: 0 20px 20px 0;
     border-radius: 8px;
@@ -117,15 +133,20 @@ include 'page/header.php';
 
 
 
-    @media (max-width: 768px) {
-        .responsive-image {
-            float: none; /* Hilangkan float di layar kecil */
-            display: block; /* Gambar berada di atas teks */
-            margin: 0 auto 20px; /* Tengahkan gambar dan beri jarak bawah */
-            max-width: 100%; /* Sesuaikan dengan lebar layar */
+
+        @media (max-width: 768px) {
+            .responsive-image {
+                float: none;
+                /* Hilangkan float di layar kecil */
+                display: block;
+                /* Gambar berada di atas teks */
+                margin: 0 auto 20px;
+                /* Tengahkan gambar dan beri jarak bawah */
+                max-width: 100%;
+                /* Sesuaikan dengan lebar layar */
+            }
         }
-    }
-</style>
+    </style>
 
 
     <br>
