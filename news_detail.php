@@ -67,6 +67,7 @@ include 'page/header.php';
         <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
     </div>
 
+    <br>
     <!-- Display view count below the content -->
     <p><strong>Jumlah Views:</strong> <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></p>
 
