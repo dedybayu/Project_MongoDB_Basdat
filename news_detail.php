@@ -56,16 +56,55 @@ include 'page/header.php';
     </p>
     <hr>
 
-    <!-- Display image on top and content below -->
-    <div class="content-box mt-0 responsive-content">
-        <?php if (isset($article['image'])): ?>
-            <div class="image-box mb-4">
-                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                    style="float: left; max-width: 600px; margin-right: 20px; margin-bottom: 20px;">
-                <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
-            </div>
-        <?php endif; ?>
-    </div>
+<!-- Display image inside paragraph with content wrapping -->
+<div class="content-box mt-0 responsive-content">
+    <?php if (isset($article['image'])): ?>
+        <div class="image-text-container">
+            <p class="text-content">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita" class="responsive-image">
+                <?= nl2br(htmlspecialchars($article['content'])) ?>
+            </p>
+        </div>
+    <?php else: ?>
+        <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+    <?php endif; ?>
+</div>
+
+<!-- Tambahkan CSS -->
+<style>
+    .responsive-content {
+        margin-bottom: 20px;
+    }
+
+    .image-text-container {
+        overflow: hidden; /* Pastikan elemen tidak meluap */
+    }
+
+    .text-content {
+        line-height: 1.6; /* Meningkatkan keterbacaan teks */
+        margin: 0;
+        text-align: justify; /* Teks rata kanan dan kiri */
+    }
+
+    .responsive-image {
+        float: left; /* Membuat gambar berada di kiri teks */
+        max-width: 50%; /* Batasi lebar gambar hingga 50% */
+        margin: 0 20px 20px 0; /* Tambahkan jarak antara gambar dan teks */
+        height: auto; /* Pertahankan rasio gambar */
+        border-radius: 8px; /* Opsional: sudut melengkung */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opsional: bayangan */
+    }
+
+    @media (max-width: 768px) {
+        .responsive-image {
+            float: none; /* Hilangkan float di layar kecil */
+            display: block; /* Gambar berada di atas teks */
+            margin: 0 auto 20px; /* Tengahkan gambar dan beri jarak bawah */
+            max-width: 100%; /* Sesuaikan dengan lebar layar */
+        }
+    }
+</style>
+
 
 
 
@@ -106,6 +145,8 @@ include 'page/header.php';
         <button type="submit" class="btn btn-primary">Kirim Komentar</button>
     </form>
 </div>
+
+
 
 <?php
 include 'page/footer.php';
