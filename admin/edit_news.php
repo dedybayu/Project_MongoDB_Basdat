@@ -84,7 +84,7 @@ include 'page/header.php';
         <input type="text" name="author" id="author" class="form-control" value="<?= htmlspecialchars($article['author']) ?>" required>
     </div>
     <div class="form-group">
-        <label for="image">Gambar</label>
+        <label for="image">Ganti Gambar</label>
         <input type="file" name="image" id="image" class="form-control" accept="image/*">
         <?php if (isset($article['image'])): ?>
             <p><strong>Gambar saat ini:</strong></p>

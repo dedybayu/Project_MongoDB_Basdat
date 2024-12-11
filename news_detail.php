@@ -128,10 +128,6 @@ include 'page/header.php';
 </style>
 
 
-
-
-
-
     <br>
     <!-- Display view count below the content -->
     <p><strong>Jumlah Views:</strong> <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></p>
