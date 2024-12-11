@@ -56,21 +56,19 @@ include 'page/header.php';
     </p>
     <hr>
 
-    <!-- Display image and content side by side -->
-    <div class="d-flex align-items-start mb-4">
+    <!-- Display image on top and content below -->
+    <div class="content-box mt-0 responsive-content">
         <?php if (isset($article['image'])): ?>
-            <div class="image-box me-4">
-                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                    class="img-fluid" style="max-width: 500px;">
-            </div>
-        <?php endif; ?>
-
-        <div class="content-box mt-0">
+                <div class="image-box mb-4">
+                    <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
+                        class="img-fluid" style="max-width: 400px;">
+                </div>
+            <?php endif; ?>
             <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
-        </div>
-
     </div>
 
+
+    <br>
     <!-- Display view count below the content -->
     <p><strong>Jumlah Views:</strong> <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></p>
 
