@@ -63,12 +63,12 @@ include 'page/header.php';
     <hr>
 
     <!-- Display image inside paragraph with content wrapping -->
-<div class="content-box mt-0 responsive-content">
-    <?php if (isset($article['image'])): ?>
+    <div class="content-box mt-0 responsive-content">
+        <?php if (isset($article['image'])): ?>
             <div class="image-text-container">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita" 
+                    class="responsive-image">
                 <p class="text-content">
-                    <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                        class="responsive-image">
                     <?= nl2br(htmlspecialchars($article['content'])) ?>
                 </p>
             </div>
@@ -82,46 +82,24 @@ include 'page/header.php';
         .responsive-content {
             margin-bottom: 20px;
         }
-    
+
         .image-text-container {
-            overflow: hidden;
-            /* Pastikan elemen tidak meluap */
+            text-align: center; /* Memastikan gambar berada di tengah */
         }
-    
+
         .text-content {
-            line-height: 1.6;
-            /* Meningkatkan keterbacaan teks */
+            line-height: 1.6; /* Meningkatkan keterbacaan teks */
             margin: 0;
-            text-align: justify;
-            /* Teks rata kanan dan kiri */
+            text-align: justify; /* Teks rata kanan dan kiri */
         }
-    
+
         .responsive-image {
-            float: left;
-            /* Membuat gambar berada di kiri teks */
-            max-width: 50%;
-            /* Batasi lebar gambar hingga 50% */
-            margin: 0 20px 20px 0;
-            /* Tambahkan jarak antara gambar dan teks */
-            height: auto;
-            /* Pertahankan rasio gambar */
+            display: block;
+            margin: 0 auto 20px; /* Tengahkan gambar dan beri jarak bawah */
+            max-width: 70%; /* Batasi ukuran gambar hingga 80% dari lebar container */
+            height: auto; /* Pertahankan ukuran gambar */
             border-radius: 8px;
-            /* Opsional: sudut melengkung */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Opsional: bayangan */
-        }
-    
-        @media (max-width: 768px) {
-            .responsive-image {
-                float: none;
-                /* Hilangkan float di layar kecil */
-                display: block;
-                /* Gambar berada di atas teks */
-                margin: 0 auto 20px;
-                /* Tengahkan gambar dan beri jarak bawah */
-                max-width: 100%;
-                /* Sesuaikan dengan lebar layar */
-            }
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
     </style>
 
