@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
 // Handle comment deletion
 if (isset($_GET['delete_comment_id'])) {
     $deleteCommentId = new MongoDB\BSON\ObjectId($_GET['delete_comment_id']);
-    
+
     // Delete the comment from the comments collection
     $commentsCollection->deleteOne(['_id' => $deleteCommentId]);
 
@@ -63,12 +63,12 @@ include 'page/header.php';
     <hr>
 
     <!-- Display image inside paragraph with content wrapping -->
-<div class="content-box mt-0 responsive-content">
+    <div class="content-box mt-0 responsive-content">
     <?php if (isset($article['image'])): ?>
             <div class="image-text-container">
                 <p class="text-content">
                     <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                        class="responsive-image">
+                        class="responsive-image size-<?= isset($article['image_size']) ? htmlspecialchars($article['image_size']) : 'medium' ?>"> <!-- Menambahkan class dinamis -->
                     <?= nl2br(htmlspecialchars($article['content'])) ?>
                 </p>
             </div>
@@ -76,41 +76,70 @@ include 'page/header.php';
             <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
         <?php endif; ?>
     </div>
-    
+
+
+
+
     <!-- Tambahkan CSS -->
     <style>
         .responsive-content {
-            margin-bottom: 20px;
-        }
-    
-        .image-text-container {
-            overflow: hidden;
-            /* Pastikan elemen tidak meluap */
-        }
-    
-        .text-content {
-            line-height: 1.6;
-            /* Meningkatkan keterbacaan teks */
-            margin: 0;
-            text-align: justify;
-            /* Teks rata kanan dan kiri */
-        }
-    
-        .responsive-image {
-            float: left;
-            /* Membuat gambar berada di kiri teks */
-            max-width: 50%;
-            /* Batasi lebar gambar hingga 50% */
-            margin: 0 20px 20px 0;
-            /* Tambahkan jarak antara gambar dan teks */
-            height: auto;
-            /* Pertahankan rasio gambar */
-            border-radius: 8px;
-            /* Opsional: sudut melengkung */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Opsional: bayangan */
-        }
-    
+    margin-bottom: 20px;
+}
+
+.image-text-container {
+    overflow: hidden;
+    /* Pastikan elemen tidak meluap */
+}
+
+.text-content {
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
+
+.responsive-image {
+    float: left;
+    margin: 0 20px 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    object-fit: contain;  /* Menjaga rasio gambar dengan menyelaraskan ukuran gambar */
+    width: 100%;
+    height: 100%;
+}
+
+/* Ukuran gambar yang diatur ke 500px x 500px */
+.responsive-image.size-small {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.responsive-image.size-medium {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.responsive-image.size-large {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+/* Ukuran default dengan rasio tetap */
+.responsive-image.default-size {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+
+
+
         @media (max-width: 768px) {
             .responsive-image {
                 float: none;
@@ -138,14 +167,15 @@ include 'page/header.php';
             <div class="comment">
                 <p><?= htmlspecialchars($comment['comment']) ?></p>
                 <p><small>Ditambahkan pada:
-                    <?php
-                    $createdAt = $comment['created_at']->toDateTime();
-                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                    echo $createdAt->format('d-m-Y H:i');
-                    ?>
-                </small></p>
+                        <?php
+                        $createdAt = $comment['created_at']->toDateTime();
+                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                        echo $createdAt->format('d-m-Y H:i');
+                        ?>
+                    </small></p>
                 <!-- Delete Comment Button -->
-                <a href="?id=<?= $article['_id'] ?>&delete_comment_id=<?= $comment['_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?');">Hapus</a>
+                <a href="?id=<?= $article['_id'] ?>&delete_comment_id=<?= $comment['_id'] ?>" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?');">Hapus</a>
                 <hr>
             </div>
         <?php endforeach; ?>
@@ -163,7 +193,8 @@ include 'page/header.php';
     <!-- Tombol Edit dan Hapus -->
     <div class="mt-4">
         <a href="edit_news.php?id=<?= $article['_id'] ?>" class="btn btn-primary">Edit</a>
-        <a href="delete_news.php?id=<?= $article['_id'] ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">Hapus</a>
+        <a href="delete_news.php?id=<?= $article['_id'] ?>" class="btn btn-danger"
+            onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">Hapus</a>
     </div>
 </div>
 
