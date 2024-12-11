@@ -55,19 +55,22 @@ include 'page/header.php';
         ?>
     </p>
     <hr>
-    
-    <!-- Display image if it exists -->
-    <?php if (isset($article['image'])): ?>
-        <div class="image-box mb-4">
-            <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita" class="img-fluid">
-        </div>
-    <?php endif; ?>
 
-    <div class="content-box">
-        <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+    <!-- Display image and content side by side -->
+    <div class="d-flex align-items-start mb-4">
+        <?php if (isset($article['image'])): ?>
+            <div class="image-box me-4">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
+                    class="img-fluid" style="max-width: 500px;">
+            </div>
+        <?php endif; ?>
+
+        <div class="content-box mt-0">
+            <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+        </div>
+
     </div>
 
-    <br>
     <!-- Display view count below the content -->
     <p><strong>Jumlah Views:</strong> <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></p>
 
@@ -81,19 +84,19 @@ include 'page/header.php';
             <div class="comment">
                 <p><?= htmlspecialchars($comment['comment']) ?></p>
                 <p><small>Ditambahkan pada:
-                    <?php
-                    $createdAt = $comment['created_at']->toDateTime();
-                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                    echo $createdAt->format('d-m-Y H:i');
-                    ?>
-                </small></p>
+                        <?php
+                        $createdAt = $comment['created_at']->toDateTime();
+                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                        echo $createdAt->format('d-m-Y H:i');
+                        ?>
+                    </small></p>
                 <hr>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <!-- Comment Form -->
-     <br>
+    <br>
     <h4>Tambahkan Komentar:</h4>
     <form action="" method="post">
         <div class="form-group">
