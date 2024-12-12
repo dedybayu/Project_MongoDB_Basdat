@@ -6,7 +6,7 @@
     </style>
 <!-- Footer -->
 <div class="footer">
-    <span>&copy; 2024 Berita.com. All Rights Reserved</span>
+    <span>&copy; 2024 KataData.com. All Rights Reserved</span>
 </div>
 
 <!-- Bootstrap Bundle JS -->

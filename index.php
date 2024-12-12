@@ -96,7 +96,7 @@ include 'page/header-user.php';
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                            <h3 class="m-0">Latest</h3>
+                            <h3 class="m-0">Terbaru</h3>
 
                         </div>
                     </div>

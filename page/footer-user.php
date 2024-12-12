@@ -2,13 +2,13 @@
 <div class="container-fluid bg-light pt-5 px-sm-3 px-md-5">
     <div class="row">
         <div class="col-lg-4 col-md-6 mb-3">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <h1 class="mb-2 mt-n2 display-5 text-uppercase"><span class="text-primary">Kata</span>Data</h1>
             </a>
             <p>Jurusan Teknologi Informasi<br> Politeknik Negeri Malang</p>
         </div>
         <p class="mt-5 text-center">
-        &copy; <a class="font-weight-bold" href="#">KataData.com</a>. All Rights Reserved.
+        &copy; <a class="font-weight-bold" href="index.php">KataData.com</a>. All Rights Reserved.
 
         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
         Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>

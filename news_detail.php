@@ -39,154 +39,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
     }
 }
 
-include 'page/header.php';
+include 'page/header-user.php';
 ?>
 
-<div class="container">
-    <h1 class="my-4"><?= htmlspecialchars($article['title']) ?></h1>
-    <p><strong>Penulis:</strong> <?= htmlspecialchars($article['author']) ?></p>
-    <p><strong>Kategori:</strong> <?= htmlspecialchars($article['category']) ?></p>
-    <p><strong>Diterbitkan:</strong>
-        <?php
-        // Format the created_at timestamp to Jakarta timezone
-        $createdAt = $article['created_at']->toDateTime();
-        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-        echo $createdAt->format('d-m-Y H:i');
-        ?>
-    </p>
-    <hr>
 
-    <!-- Display image inside paragraph with content wrapping -->
-    <div class="content-box mt-0 responsive-content">
-    <?php if (isset($article['image'])): ?>
-            <div class="image-text-container">
-                <p class="text-content">
-                    <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
-                        class="responsive-image size-<?= isset($article['image_size']) ? htmlspecialchars($article['image_size']) : 'medium' ?>"> <!-- Menambahkan class dinamis -->
-                    <?= nl2br(htmlspecialchars($article['content'])) ?>
-                </p>
+<!-- Main News Slider Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between bg-transparent py-2 px-0 mb-3">
+                            <h3 class="m-0"><?= htmlspecialchars($article['title']) ?></h3>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="position-relative mb-3">
+                            <?php if (isset($article['image'])): ?>
+                                <img class="img-fluid w-100" src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" alt="Gambar Berita"
+                                    style="object-fit: cover; width: 100%; height: 500px; margin-bottom: 20px;">
+                            <?php endif; ?>
+                            <div class="overlay position-relative bg-light">
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                    <span class="px-1">/</span>
+                                    <a><?php
+                                    // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                    $createdAt = $article['created_at']->toDateTime();
+
+                                    // Set zona waktu ke WIB (Asia/Jakarta)
+                                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+
+                                    // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                    echo $createdAt->format('d-m-Y');
+                                    ?></a>
+                                </div>
+                                <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        <?php else: ?>
-            <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
-        <?php endif; ?>
+            
+            <div class="col-lg-4">
+                <!-- Tambahkan komentar di sini -->
+                <h4>Komentar:</h4>
+                <?php if (count($comments) == 0): ?>
+                    <p>Belum ada komentar.</p>
+                <?php else: ?>
+                    <?php foreach ($comments as $comment): ?>
+                        <div class="comment">
+                            <p><?= htmlspecialchars($comment['comment']) ?></p>
+                            <p><small>Ditambahkan pada:
+                                    <?php
+                                    $createdAt = $comment['created_at']->toDateTime();
+                                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                    echo $createdAt->format('d-m-Y H:i');
+                                    ?>
+                                </small></p>
+                            <hr>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <!-- Form komentar -->
+                <br>
+                <h4>Tambahkan Komentar:</h4>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <textarea name="comment" class="form-control" rows="3" required></textarea </div><br>
+                    <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-
-
-
-    <!-- Tambahkan CSS -->
-    <style>
-        .responsive-content {
-    margin-bottom: 20px;
-}
-
-.image-text-container {
-    overflow: hidden;
-    /* Pastikan elemen tidak meluap */
-}
-
-.text-content {
-    line-height: 1.6;
-    margin: 0;
-    text-align: justify;
-}
-
-.responsive-image {
-    float: left;
-    margin: 0 20px 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    object-fit: contain;  /* Menjaga rasio gambar dengan menyelaraskan ukuran gambar */
-    width: 100%;
-    height: 100%;
-}
-
-/* Ukuran gambar yang diatur ke 500px x 500px */
-.responsive-image.size-small {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
-
-.responsive-image.size-medium {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
-
-.responsive-image.size-large {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
-
-/* Ukuran default dengan rasio tetap */
-.responsive-image.default-size {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
-
-
-
-
-        @media (max-width: 768px) {
-            .responsive-image {
-                float: none;
-                /* Hilangkan float di layar kecil */
-                display: block;
-                /* Gambar berada di atas teks */
-                margin: 0 auto 20px;
-                /* Tengahkan gambar dan beri jarak bawah */
-                max-width: 100%;
-                /* Sesuaikan dengan lebar layar */
-            }
-        }
-    </style>
-
-
-    <br>
-    <!-- Display view count below the content -->
-    <p><strong>Jumlah Views:</strong> <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></p>
-
-    <hr>
-    <!-- Display existing comments -->
-    <h4>Komentar:</h4>
-    <?php if (count($comments) == 0): ?>
-        <p>Belum ada komentar.</p>
-    <?php else: ?>
-        <?php foreach ($comments as $comment): ?>
-            <div class="comment">
-                <p><?= htmlspecialchars($comment['comment']) ?></p>
-                <p><small>Ditambahkan pada:
-                        <?php
-                        $createdAt = $comment['created_at']->toDateTime();
-                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                        echo $createdAt->format('d-m-Y H:i');
-                        ?>
-                    </small></p>
-                <hr>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-
-    <!-- Comment Form -->
-    <br>
-    <h4>Tambahkan Komentar:</h4>
-    <form action="" method="post">
-        <div class="form-group">
-            <textarea name="comment" class="form-control" rows="3" required></textarea>
-        </div><br>
-        <button type="submit" class="btn btn-primary">Kirim Komentar</button>
-    </form>
 </div>
 
-
-
-<?php
-include 'page/footer.php';
-?>
+<?php include 'page/footer-user.php'; ?>
