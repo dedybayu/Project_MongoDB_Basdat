@@ -44,44 +44,45 @@ include 'page/header-user.php';
             
             <div class="col-lg-4">
 
-                <!-- trending new start -->
-                <div class="pb-3">
-                    <?php
-                    $newsTrending = $newsCollection->find([], [
-                        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
-                    ]);
-                    ?>
-                    <div class="bg-light py-2 px-4 mb-3">
-                        <h3 class="m-0">Trending</h3>
+                <!-- Trending News Start -->
+<div class="pb-3">
+    <?php
+    $newsTrending = $newsCollection->find([], [
+        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
+    ]);
+    ?>
+    <div class="bg-light py-2 px-4 mb-3">
+        <h3 class="m-0">Trending</h3>
+    </div>
+    <!-- Tambahkan container dengan scrolling -->
+    <div style="max-height: 400px; overflow-y: auto;">
+        <?php foreach ($newsTrending as $article): ?>
+            <div class="d-flex mb-3">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                    style="width: 100px; height: 100px; object-fit: cover;">
+                <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
+                    style="height: 100px;">
+                    <div class="mb-1" style="font-size: 13px;">
+                        <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                        <span class="px-1">/</span>
+                        <span><?php
+                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                        $createdAt = $article['created_at']->toDateTime();
+
+                        // Set zona waktu ke WIB (Asia/Jakarta)
+                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+
+                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                        echo $createdAt->format('d-m-Y');
+                        ?></span>
                     </div>
-                    <?php foreach ($newsTrending as $article): ?>
-                        <div class="d-flex mb-3">
-                            <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-                            <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
-                                >
-                                <div class="mb-1" style="font-size: 13px;">
-                                    <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
-                                    <span class="px-1">/</span>
-                                    <span><?php
-                                    // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                                    $createdAt = $article['created_at']->toDateTime();
-
-                                    // Set zona waktu ke WIB (Asia/Jakarta)
-                                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-
-                                    // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                                    echo $createdAt->format('d-m-Y');
-                                    ?></span>
-                                </div>
-                                <a class="h6 m-0" href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-
-
+                    <a class="h6 m-0" href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
                 </div>
-                <!-- Trending News End -->
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<!-- Trending News End -->
             </div>
         </div>
     </div>
