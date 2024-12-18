@@ -4,7 +4,7 @@ require '../config/database.php';
 
 $news = iterator_to_array($newsCollection->find([], ['sort' => ['created_at' => -1]]));
 
-include 'page/header.php';
+include 'page/header-admin.php';
 ?>
 
     <div class="container">
@@ -54,5 +54,5 @@ include 'page/header.php';
         <?php endif; ?>
     </div>
 <?php
-include 'page/footer.php';
+include 'page/footer-admin.php';
 ?>

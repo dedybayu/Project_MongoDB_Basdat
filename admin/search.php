@@ -13,7 +13,7 @@ $cursor = $newsCollection->find(
 // Ubah cursor menjadi array
 $results = iterator_to_array($cursor);
 
-include 'page/header.php';
+include 'page/header-admin.php';
 ?>
 
 <div class="container">
@@ -39,4 +39,4 @@ include 'page/header.php';
     </div>
 </div>
 
-<?php include 'page/footer.php'; ?>
+<?php include 'page/footer-admin.php'; ?>

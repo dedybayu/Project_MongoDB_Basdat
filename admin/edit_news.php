@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
-include 'page/header.php';
+include 'page/header-admin.php';
 ?>
 
     <div class="container">
@@ -97,5 +97,5 @@ include 'page/header.php';
 
     </div>
 <?php
-include 'page/footer.php';
+include 'page/footer-admin.php';
 ?>

@@ -1,48 +1,156 @@
 <?php
-include 'page/header.php';
-
-// Fetch news articles sorted by the number of views in descending order
-$news = $newsCollection->find([], [
-    'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
-]);
+include 'page/header-admin.php';
 ?>
-<div class="container">
-    <h1 class="my-4">Berita Trending</h1>
-    <form action="search.php" method="get" class="mb-4">
-        <input type="text" name="q" class="form-control" placeholder="Cari berita...">
-    </form>
-    <div class="list-group">
-        <?php foreach ($news as $article): ?>
-            <a href="view_detail.php?id=<?= $article['_id'] ?>" class="list-group-item">
-                <h5><?= htmlspecialchars($article['title']) ?></h5>
-                <p><?= htmlspecialchars($article['summary']) ?></p>
-                <small>Created at: <?php
-                // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                $createdAt = $article['created_at']->toDateTime();
 
-                // Set zona waktu ke WIB (Asia/Jakarta)
-                $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+<!-- Main News Slider Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="owl-carousel owl-carousel-2 carousel-item-1 position-relative mb-3 mb-lg-0">
+                    <?php
+                    $news = $newsCollection->find([], [
+                        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
+                    ]);
+                    foreach ($news as $article): ?>
 
-                // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                echo $createdAt->format('d-m-Y H:i');
-                ?></small>
-                <br>
-                <small>Updated at: <?php
-                // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                $updatedAt = $article['updated_at']->toDateTime();
+                        <div class="position-relative overflow-hidden" style="height: 435px;">
+                            <img class="img-fluid h-100"
+                                src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                                style="object-fit: cover;">
+                            <div class="overlay">
+                                <div class="mb-1 w-100" style="font-weight: 500; font-size: 19px;">
+                                    <a class="text-white"
+                                        href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
+                                    <span class="px-2 text-white">/</span>
+                                    <span class="text-white"><?php
+                                    // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                    $createdAt = $article['created_at']->toDateTime();
 
-                // Set zona waktu ke WIB (Asia/Jakarta)
-                $updatedAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                    // Set zona waktu ke WIB (Asia/Jakarta)
+                                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-                // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                echo $updatedAt->format('d-m-Y H:i');
-                ?></small>
-                <br>
-                <small>Jumlah Views: <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></small>
-            </a>
-        <?php endforeach; ?>
+                                    // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                    echo $createdAt->format('d-m-Y');
+                                    ?></span>
+
+                                    <span class="text-white" style="float: right;">Views:
+                                        <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></span>
+                                </div>
+                                <a class="h2 m-0 text-white font-weight-bold"
+                                    style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
+                                    href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                            </div>
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+
+                <!-- Trending News Start -->
+                <div class="pb-3">
+                    <?php
+                    $newsTrending = $newsCollection->find([], [
+                        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
+                    ]);
+                    ?>
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Trending</h3>
+                    </div>
+                    <!-- Tambahkan container dengan scrolling -->
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <?php foreach ($newsTrending as $article): ?>
+                            <div class="d-flex mb-3">
+                                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a
+                                            href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
+                                        <span class="px-1">/</span>
+                                        <span><?php
+                                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                        $createdAt = $article['created_at']->toDateTime();
+
+                                        // Set zona waktu ke WIB (Asia/Jakarta)
+                                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+
+                                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                        echo $createdAt->format('d-m-Y');
+                                        ?></span>
+                                    </div>
+                                    <a class="h6 m-0"
+                                        href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <!-- Trending News End -->
+            </div>
+        </div>
     </div>
 </div>
+<!-- Main News Slider End -->
+
+<!-- Latest Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0">Terbaru</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <?php
+                        $news2 = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
+                        ?>
+                        <?php foreach ($news2 as $article): ?>
+                            <div class="d-flex mb-3">
+                                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a
+                                            href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
+                                        <span class="px-1">/</span>
+                                        <span><?php
+                                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                        $createdAt = $article['created_at']->toDateTime();
+
+                                        // Set zona waktu ke WIB (Asia/Jakarta)
+                                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+
+                                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                        echo $createdAt->format('d-m-Y H:i');
+                                        ?></span>
+                                    </div>
+                                    <a class="h6 m-0"
+                                        href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 pt-3 pt-lg-0">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Latest End -->
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Pilih semua tautan kategori yang memiliki kelas 'category-link'
@@ -59,5 +167,5 @@ $news = $newsCollection->find([], [
 </script>
 
 <?php
-include 'page/footer.php';
+include 'page/footer-admin.php';
 ?>
