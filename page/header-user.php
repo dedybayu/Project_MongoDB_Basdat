@@ -208,12 +208,7 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                 // Menambahkan notifikasi baru di atas daftar
                 notificationContent.prepend(notificationItem);
             });
-        } else {
-            const emptyMessage = document.createElement('p');
-            emptyMessage.classList.add('text-muted');
-            emptyMessage.textContent = 'Tidak ada notifikasi baru';
-            notificationContent.appendChild(emptyMessage);
-        }
+        } 
     });
 }, 3000); // Interval setiap 3 detik
 
