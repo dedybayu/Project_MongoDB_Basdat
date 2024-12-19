@@ -108,6 +108,10 @@ include 'page/header-admin.php';
                                         <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
                                     <?php endif; ?>
                                     <br><br>
+                                    <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
+                                    <br><br>
                                     <div class="d-flex justify-content-between">
                                         <a href="edit_news.php?id=<?= $article['_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="delete_news.php?id=<?= $article['_id'] ?>" class="btn btn-danger btn-sm"

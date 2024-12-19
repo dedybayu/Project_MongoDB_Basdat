@@ -106,7 +106,7 @@ include 'page/header-user.php';
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                            <h3 class="m-0">Terbaru</h3>
+                            <h3 class="m-0">Trending</h3>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -122,7 +122,7 @@ include 'page/header-user.php';
 
                         // Ambil data artikel berdasarkan halaman
                         $news2 = $newsCollection->find([], [
-                            'sort' => ['created_at' => -1],
+                            'sort' => ['views' => -1],
                             'skip' => $skip,
                             'limit' => $articlesPerPage
                         ]);
@@ -146,6 +146,9 @@ include 'page/header-user.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                        <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>

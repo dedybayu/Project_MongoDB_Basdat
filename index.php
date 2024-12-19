@@ -16,7 +16,8 @@ include 'page/header-user.php';
                                 style="object-fit: cover;">
                             <div class="overlay">
                                 <div class="mb-1 w-100" style="font-weight: 500; font-size: 19px;">
-                                <a class="text-white" href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                    <a class="text-white"
+                                        href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
                                     <span class="px-2 text-white">/</span>
                                     <span class="text-white"><?php
                                     // Ambil waktu yang disimpan di MongoDB (dalam UTC)
@@ -28,11 +29,12 @@ include 'page/header-user.php';
                                     // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
                                     echo $createdAt->format('d-m-Y');
                                     ?></span>
-                                    
+
                                     <span class="text-white" style="float: right;">Views:
                                         <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></span>
                                 </div>
-                                <a class="h2 m-0 text-white font-weight-bold" style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
+                                <a class="h2 m-0 text-white font-weight-bold"
+                                    style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
                                     href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
                             </div>
                         </div>
@@ -41,48 +43,53 @@ include 'page/header-user.php';
 
                 </div>
             </div>
-            
+
             <div class="col-lg-4">
 
                 <!-- Trending News Start -->
-<div class="pb-3">
-    <?php
-    $newsTrending = $newsCollection->find([], [
-        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
-    ]);
-    ?>
-    <div class="bg-light py-2 px-4 mb-3">
-        <h3 class="m-0">Trending</h3>
-    </div>
-    <!-- Tambahkan container dengan scrolling -->
-    <div style="max-height: 400px; overflow-y: auto;">
-        <?php foreach ($newsTrending as $article): ?>
-            <div class="d-flex mb-3">
-                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
-                    style="width: 100px; height: 100px; object-fit: cover;">
-                <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
-                    style="height: 100px;">
-                    <div class="mb-1" style="font-size: 13px;">
-                        <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
-                        <span class="px-1">/</span>
-                        <span><?php
-                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                        $createdAt = $article['created_at']->toDateTime();
-
-                        // Set zona waktu ke WIB (Asia/Jakarta)
-                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-
-                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                        echo $createdAt->format('d-m-Y');
-                        ?></span>
+                <div class="pb-3">
+                    <?php
+                    $newsTrending = $newsCollection->find([], [
+                        'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
+                    ]);
+                    ?>
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Trending</h3>
                     </div>
-                    <a class="h6 m-0" href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                    <!-- Tambahkan container dengan scrolling -->
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <?php foreach ($newsTrending as $article): ?>
+                            <div class="d-flex mb-3">
+                                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a
+                                            href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
+                                        <span class="px-1">/</span>
+                                        <span><?php
+                                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                        $createdAt = $article['created_at']->toDateTime();
+
+                                        // Set zona waktu ke WIB (Asia/Jakarta)
+                                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+
+                                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                        echo $createdAt->format('d-m-Y');
+                                        ?></span>
+                                    </div>
+                                    <a class="h6 m-0"
+                                        href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                    <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-<!-- Trending News End -->
+                <!-- Trending News End -->
             </div>
         </div>
     </div>
@@ -104,7 +111,7 @@ include 'page/header-user.php';
                         <?php
                         // Konfigurasi paginasi
                         $articlesPerPage = 7;
-                        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
                         $skip = ($currentPage - 1) * $articlesPerPage;
 
                         // Hitung total artikel
@@ -119,14 +126,15 @@ include 'page/header-user.php';
                         ]);
 
                         foreach ($news2 as $article):
-                        ?>
+                            ?>
                             <div class="d-flex mb-3">
                                 <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
                                     style="width: 100px; height: 100px; object-fit: cover;">
                                 <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
                                     style="height: 100px;">
                                     <div class="mb-1" style="font-size: 13px;">
-                                        <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                        <a
+                                            href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
                                         <span class="px-1">/</span>
                                         <span><?php
                                         // Ambil waktu yang disimpan di MongoDB (dalam UTC)
@@ -137,6 +145,9 @@ include 'page/header-user.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                    <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>

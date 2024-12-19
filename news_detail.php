@@ -88,80 +88,87 @@ include 'page/header-user.php';
                                 <div>
                                     <span><?= $article['author'] ?></span>
                                 </div>
-                                
+
                             </div>
                             <div class="w-100 ">
                                 <h3 class="mb-3"><?= $article['title'] ?></h3>
                                 <div class="content-box mt-0 responsive-content">
-                                <?php if (isset($article['image'])): ?>
-                                <div class="content image-text-container">
-                                    <p class="text-content">
-                                        <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
-                                            style="object-fit: cover; width: 500px; height: 280px;
-                                            alt="Gambar Berita"
-                                            class="img-fluid w-50 float-left mr-4 mb-2 responsive-image size-<?= isset($article['image_size']) ? htmlspecialchars($article['image_size']) : 'medium' ?>">
-                                        <!-- Menambahkan class dinamis -->
-                                        <?= nl2br(htmlspecialchars($article['content'])) ?>
-                                    </p>
+                                    <?php if (isset($article['image'])): ?>
+                                        <div class="content image-text-container">
+                                            <p class="text-content">
+                                                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                                                    style="object-fit: cover; width: 500px; height: 280px;
+                                            alt=" Gambar Berita"
+                                                    class="img-fluid w-50 float-left mr-4 mb-2 responsive-image size-<?= isset($article['image_size']) ? htmlspecialchars($article['image_size']) : 'medium' ?>">
+                                                <!-- Menambahkan class dinamis -->
+                                                <?= nl2br(htmlspecialchars($article['content'])) ?>
+                                            </p>
+                                        </div>
+                                    <?php else: ?>
+                                        <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
+                                    <?php endif; ?>
+                                        <br><br>
+                                    <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
-                                <?php else: ?>
-                                    <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
-                                <?php endif; ?>
 
-                            </div>
-                    
-                         <!-- Tambahkan CSS -->
-    <style>
-        .responsive-content {
-    margin-bottom: 20px;
-}
-.image-text-container {
-    overflow: hidden;
-    /* Pastikan elemen tidak meluap */
-}
-.text-content {
-    line-height: 1.6;
-    margin: 0;
-    text-align: justify;
-}
-.responsive-image {
-    float: left;
-    margin: 0 20px 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    object-fit: contain;  /* Menjaga rasio gambar dengan menyelaraskan ukuran gambar */
-    width: 100%;
-    height: 100%;
-}
+                                <!-- Tambahkan CSS -->
+                                <style>
+                                    .responsive-content {
+                                        margin-bottom: 20px;
+                                    }
 
-/* Ukuran gambar yang diatur ke 500px x 500px */
-.responsive-image.size-small {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
+                                    .image-text-container {
+                                        overflow: hidden;
+                                        /* Pastikan elemen tidak meluap */
+                                    }
 
-.responsive-image.size-medium {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
-}
+                                    .text-content {
+                                        line-height: 1.6;
+                                        margin: 0;
+                                        text-align: justify;
+                                    }
 
-@media (max-width: 768px) {
-            .responsive-image {
-                float: none;
-                /* Hilangkan float di layar kecil */
-                display: block;
-                /* Gambar berada di atas teks */
-                margin: 0 auto 20px;
-                /* Tengahkan gambar dan beri jarak bawah */
-                max-width: 100%;
-                /* Sesuaikan dengan lebar layar */
-            }
-        }
-    </style>
+                                    .responsive-image {
+                                        float: left;
+                                        margin: 0 20px 20px 0;
+                                        border-radius: 8px;
+                                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                                        object-fit: contain;
+                                        /* Menjaga rasio gambar dengan menyelaraskan ukuran gambar */
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+
+                                    /* Ukuran gambar yang diatur ke 500px x 500px */
+                                    .responsive-image.size-small {
+                                        width: 100%;
+                                        height: 100%;
+                                        max-width: 500px;
+                                        max-height: 500px;
+                                    }
+
+                                    .responsive-image.size-medium {
+                                        width: 100%;
+                                        height: 100%;
+                                        max-width: 500px;
+                                        max-height: 500px;
+                                    }
+
+                                    @media (max-width: 768px) {
+                                        .responsive-image {
+                                            float: none;
+                                            /* Hilangkan float di layar kecil */
+                                            display: block;
+                                            /* Gambar berada di atas teks */
+                                            margin: 0 auto 20px;
+                                            /* Tengahkan gambar dan beri jarak bawah */
+                                            max-width: 100%;
+                                            /* Sesuaikan dengan lebar layar */
+                                        }
+                                    }
+                                </style>
                             </div>
                         </div>
                     </div>
