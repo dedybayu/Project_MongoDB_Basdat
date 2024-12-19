@@ -107,7 +107,9 @@ include 'page/header-admin.php';
                                     <?php else: ?>
                                         <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
                                     <?php endif; ?>
-
+                                    <a href="edit_news.php?id=<?= $article['_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="delete_news.php?id=<?= $article['_id'] ?>" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Anda yakin ingin menghapus berita ini?')">Hapus</a>
                                 </div>
 
                                 <!-- Tambahkan CSS -->
@@ -204,8 +206,6 @@ include 'page/header-admin.php';
                                             <?= isset($comment['comment']) ? htmlspecialchars($comment['comment']) : 'Komentar tidak tersedia' ?>
                                         </p>
                                         <div class="d-flex justify-content-end">
-                                            <a href="edit_news.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>"
-                                                class="btn btn-sm btn-warning mr-2">Edit</a>
                                             <a href="delete_news.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>"
                                                 class="btn btn-sm btn-danger"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?');">Hapus</a>
