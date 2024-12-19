@@ -215,7 +215,7 @@ $recentNotifications = $notificationsCollection->find([], ['sort' => ['created_a
                                     });
                                 }
                             });
-                    }, 3000);
+                    }, 1000);
                 </script>
             </div>
         </nav>
