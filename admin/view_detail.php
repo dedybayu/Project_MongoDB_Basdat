@@ -97,7 +97,7 @@ include 'page/header-admin.php';
                                         <div class="content image-text-container">
                                             <p class="text-content">
                                                 <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
-                                                    style="object-fit: cover; width: 500px; height: 280px;
+                                                    style="object-fit: cover; width: 500px; height: 280px;"
                                             alt=" Gambar Berita"
                                                     class="img-fluid w-50 float-left mr-4 mb-2 responsive-image size-<?= isset($article['image_size']) ? htmlspecialchars($article['image_size']) : 'medium' ?>">
                                                 <!-- Menambahkan class dinamis -->
@@ -107,9 +107,13 @@ include 'page/header-admin.php';
                                     <?php else: ?>
                                         <p class="text-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
                                     <?php endif; ?>
-                                    <a href="edit_news.php?id=<?= $article['_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <br><br>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="edit_news.php?id=<?= $article['_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="delete_news.php?id=<?= $article['_id'] ?>" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Anda yakin ingin menghapus berita ini?')">Hapus</a>
+                                    </div>
+                                    
                                 </div>
 
                                 <!-- Tambahkan CSS -->
@@ -206,7 +210,7 @@ include 'page/header-admin.php';
                                             <?= isset($comment['comment']) ? htmlspecialchars($comment['comment']) : 'Komentar tidak tersedia' ?>
                                         </p>
                                         <div class="d-flex justify-content-end">
-                                            <a href="delete_news.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>"
+                                            <a href="delete_comments.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>&id_news=<?= isset($article['_id']) ? $article['_id'] : '#' ?>"
                                                 class="btn btn-sm btn-danger"
                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?');">Hapus</a>
                                         </div>
