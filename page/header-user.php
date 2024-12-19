@@ -2,10 +2,12 @@
 require 'config/database.php';
 $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
 
-// Hitung jumlah notifikasi yang belum dibaca
-$notificationCount = $notificationsCollection->countDocuments(['status' => 'unread']);
+// Menghitung jumlah notifikasi yang belum dibaca
+$totalUnreadNotifications = $notificationsCollection->countDocuments(['status' => 'unread']);
 
-$notifications = $notificationsCollection->find([], ['sort' => ['created_at' => -1]]);
+// Mengambil daftar notifikasi dengan urutan terbaru terlebih dahulu
+$recentNotifications = $notificationsCollection->find([], ['sort' => ['created_at' => -1]]);
+
 
 ?>
 <!DOCTYPE html>
