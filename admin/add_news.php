@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'author' => $_POST['author'],
         'created_at' => $mongoDate, // Menggunakan waktu lokal
         'updated_at' => $mongoDate, // Menggunakan waktu lokal
-        'image' => $imageData ? new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC) : null // Simpan binary data atau null
+        'image' => $imageData ? new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC) : null, // Simpan binary data atau null
+        'jumlah_views' => 0
     ]);
 
     // Insert data notifikasi ke dalam collection

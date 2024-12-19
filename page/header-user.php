@@ -62,17 +62,19 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                     <div id="notification-list" class="dropdown-menu dropdown-menu-left mt-2 p-2"
                         style="display: none;">
                         <div id="notification-content">
-                            
-                                <?php foreach ($notifications as $notification): ?>
-                                    <div class="dropdown-item bg-light mb-2 rounded p-2">
-                                        <p><?= $notification['message'] ?></p>
-                                        <small
-                                            class="text-muted"><?= $notification['created_at']->toDateTime()->format('d M Y, H:i') ?></small>
-                                    </div>
-                                <?php endforeach; ?>
-                           
+                            <?php foreach ($notifications as $notification): ?>
+                                <div class="dropdown-item bg-light mb-2 rounded p-2"
+                                    id="notification-<?= $notification['_id'] ?>">
+                                    <p><?= $notification['message'] ?></p>
+                                    <small
+                                        class="text-muted"><?= $notification['created_at']->toDateTime()->format('d M Y, H:i') ?></small>
+                                    <button class="btn btn-danger btn-sm float-right delete-notification"
+                                        data-id="<?= $notification['_id'] ?>">Delete</button>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="collapse navbar-collapse px-0 px-lg-1">
@@ -112,7 +114,7 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                     <div><span class="navbar-toggler-icon"></span></div>
                 </button>
 
-               
+
             </div>
 
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
@@ -135,6 +137,39 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                 </div>
 
                 <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Add event listener to all delete buttons
+                        const deleteButtons = document.querySelectorAll('.delete-notification');
+
+                        deleteButtons.forEach(button => {
+                            button.addEventListener('click', function () {
+                                const notificationId = this.getAttribute('data-id');
+                                const notificationElement = document.getElementById('notification-' + notificationId);
+
+                                // Make the AJAX request to delete the notification
+                                fetch('delete_notification.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                    },
+                                    body: 'id=' + notificationId
+                                })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        // If deletion was successful, remove the notification from the dropdown
+                                        if (data.includes('Notification deleted successfully')) {
+                                            notificationElement.remove();
+                                        } else {
+                                            alert('Error deleting notification');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert('Error deleting notification');
+                                    });
+                            });
+                        });
+                    });
 
 
                     // Tunggu sampai seluruh konten DOM selesai dimuat
@@ -171,46 +206,46 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                         });
                     });
 
-                   setInterval(() => {
-    // Ambil jumlah notifikasi
-    fetch('get_notification_count.php')
-        .then(response => response.json())
-        .then(data => {
-            const notificationCount = document.getElementById('notification-count');
-            if (data.count > 0) {
-                // Menampilkan angka dan warna jika ada notifikasi
-                notificationCount.textContent = data.count;
-                notificationCount.classList.add('bg-info');
-                notificationCount.style.display = 'inline'; // Menampilkan angka
-            } else {
-                // Menyembunyikan angka dan warna jika tidak ada notifikasi
-                notificationCount.textContent = '';
-                notificationCount.classList.remove('bg-info');
-                notificationCount.style.display = 'none'; // Menyembunyikan angka dan warna
-            }
-        });
+                    setInterval(() => {
+                        // Ambil jumlah notifikasi
+                        fetch('get_notification_count.php')
+                            .then(response => response.json())
+                            .then(data => {
+                                const notificationCount = document.getElementById('notification-count');
+                                if (data.count > 0) {
+                                    // Menampilkan angka dan warna jika ada notifikasi
+                                    notificationCount.textContent = data.count;
+                                    notificationCount.classList.add('bg-info');
+                                    notificationCount.style.display = 'inline'; // Menampilkan angka
+                                } else {
+                                    // Menyembunyikan angka dan warna jika tidak ada notifikasi
+                                    notificationCount.textContent = '';
+                                    notificationCount.classList.remove('bg-info');
+                                    notificationCount.style.display = 'none'; // Menyembunyikan angka dan warna
+                                }
+                            });
 
-    // Ambil notifikasi terbaru
-    fetch('get_notification.php')
-    .then(response => response.json())
-    .then(notifications => {
-        const notificationContent = document.getElementById('notification-content');
+                        // Ambil notifikasi terbaru
+                        fetch('get_notification.php')
+                            .then(response => response.json())
+                            .then(notifications => {
+                                const notificationContent = document.getElementById('notification-content');
 
-        // Masukkan notifikasi baru ke dalam daftar, di bagian atas
-        if (notifications.length > 0) {
-            notifications.forEach(notification => {
-                const notificationItem = document.createElement('div');
-                notificationItem.classList.add('dropdown-item', 'bg-light', 'mb-2', 'rounded', 'p-2');
-                notificationItem.innerHTML = `
+                                // Masukkan notifikasi baru ke dalam daftar, di bagian atas
+                                if (notifications.length > 0) {
+                                    notifications.forEach(notification => {
+                                        const notificationItem = document.createElement('div');
+                                        notificationItem.classList.add('dropdown-item', 'bg-light', 'mb-2', 'rounded', 'p-2');
+                                        notificationItem.innerHTML = `
                     <p>${notification.message}</p>
                     <small class="text-muted">${notification.created_at}</small>
                 `;
-                // Menambahkan notifikasi baru di atas daftar
-                notificationContent.prepend(notificationItem);
-            });
-        } 
-    });
-}, 3000); // Interval setiap 3 detik
+                                        // Menambahkan notifikasi baru di atas daftar
+                                        notificationContent.prepend(notificationItem);
+                                    });
+                                }
+                            });
+                    }, 3000); // Interval setiap 3 detik
 
 
                 </script>
