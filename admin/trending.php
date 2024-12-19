@@ -146,6 +146,9 @@ include 'page/header-admin.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                        <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>

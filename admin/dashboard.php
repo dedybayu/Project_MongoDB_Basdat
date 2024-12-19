@@ -36,6 +36,7 @@ include 'page/header-admin.php';
                                 <a class="h2 m-0 text-white font-weight-bold"
                                     style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
                                     href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                    
                             </div>
                         </div>
 
@@ -81,6 +82,9 @@ include 'page/header-admin.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                        <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -141,6 +145,9 @@ include 'page/header-admin.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                        <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>

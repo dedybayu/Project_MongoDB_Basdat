@@ -8,7 +8,7 @@ include 'page/header-user.php';
         <div class="row">
             <div class="col-lg-8">
                 <div class="owl-carousel owl-carousel-2 carousel-item-1 position-relative mb-3 mb-lg-0">
-                    <?php 
+                    <?php
                     $news = $newsCollection->find([], [
                         'sort' => ['jumlah_views' => -1]  // Sort by 'jumlah_views' in descending order
                     ]);
@@ -20,7 +20,8 @@ include 'page/header-user.php';
                                 style="object-fit: cover;">
                             <div class="overlay">
                                 <div class="mb-1 w-100" style="font-weight: 500; font-size: 19px;">
-                                <a class="text-white" href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                    <a class="text-white"
+                                        href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
                                     <span class="px-2 text-white">/</span>
                                     <span class="text-white"><?php
                                     // Ambil waktu yang disimpan di MongoDB (dalam UTC)
@@ -32,11 +33,12 @@ include 'page/header-user.php';
                                     // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
                                     echo $createdAt->format('d-m-Y');
                                     ?></span>
-                                    
+
                                     <span class="text-white" style="float: right;">Views:
                                         <?= isset($article['jumlah_views']) ? $article['jumlah_views'] : 0 ?></span>
                                 </div>
-                                <a class="h2 m-0 text-white font-weight-bold" style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
+                                <a class="h2 m-0 text-white font-weight-bold"
+                                    style="font-size: 31px; font-style: roboto, sans-serif;  hover: underline;"
                                     href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
                             </div>
                         </div>
@@ -45,50 +47,52 @@ include 'page/header-user.php';
 
                 </div>
             </div>
-            
+
             <div class="col-lg-4">
 
-<!-- Kategori dengan Total Views Paling Banyak start -->
-<div class="pb-3">
-    <?php
-    // Ambil kategori dengan jumlah views terbanyak (top 5)
-    $categoryViews = $newsCollection->aggregate([
-        [
-            '$group' => [
-                '_id' => '$category', // Kelompokkan berdasarkan kategori
-                'total_views' => ['$sum' => '$jumlah_views'] // Hitung total jumlah views untuk setiap kategori
-            ]
-        ],
-        [
-            '$sort' => ['total_views' => -1] // Urutkan berdasarkan total views terbanyak
-        ],
-        [
-            '$limit' => 4 // Batasi hanya 5 kategori teratas
-        ]
-    ]);
-    ?>
-    <div class="bg-light py-2 px-4 mb-3">
-        <h3 class="m-0">Kategori Terpopuler</h3>
-    </div>
-    <div style="max-height: 400px;">
-        <?php foreach ($categoryViews as $category): ?>
-            <div class="d-flex mb-3">
-                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 75px;">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="mb-1" style="font-size: 30px;">
-                            <a href="view_kategori.php?category=<?= $category['_id']?>"><?php echo $category['_id']; ?></a>
-                        </div>
-                        <div class="mb-1" style="font-size: 30px;">
-                            <?= $category['total_views']; ?>
-                        </div>
-                    </div>      
-                </div>
-            </div>
+                <!-- Kategori dengan Total Views Paling Banyak start -->
+                <div class="pb-3">
+                    <?php
+                    // Ambil kategori dengan jumlah views terbanyak (top 5)
+                    $categoryViews = $newsCollection->aggregate([
+                        [
+                            '$group' => [
+                                '_id' => '$category', // Kelompokkan berdasarkan kategori
+                                'total_views' => ['$sum' => '$jumlah_views'] // Hitung total jumlah views untuk setiap kategori
+                            ]
+                        ],
+                        [
+                            '$sort' => ['total_views' => -1] // Urutkan berdasarkan total views terbanyak
+                        ],
+                        [
+                            '$limit' => 4 // Batasi hanya 5 kategori teratas
+                        ]
+                    ]);
+                    ?>
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Kategori Terpopuler</h3>
+                    </div>
+                    <div style="max-height: 400px;">
+                        <?php foreach ($categoryViews as $category): ?>
+                            <div class="d-flex mb-3">
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 75px;">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mb-1" style="font-size: 30px;">
+                                            <a
+                                                href="view_kategori.php?category=<?= $category['_id'] ?>"><?php echo $category['_id']; ?></a>
+                                        </div>
+                                        <div class="mb-1" style="font-size: 30px;">
+                                            <?= $category['total_views']; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <?php endforeach; ?>
-            </div>
-        </div>
-<!-- Kategori dengan Total Views Paling Banyak end -->
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <!-- Kategori dengan Total Views Paling Banyak end -->
 
 
 
@@ -113,7 +117,7 @@ include 'page/header-user.php';
                         <?php
                         // Konfigurasi paginasi
                         $articlesPerPage = 10;
-                        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                        $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
                         $skip = ($currentPage - 1) * $articlesPerPage;
 
                         // Hitung total artikel
@@ -128,14 +132,15 @@ include 'page/header-user.php';
                         ]);
 
                         foreach ($news2 as $article):
-                        ?>
+                            ?>
                             <div class="d-flex mb-3">
                                 <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
                                     style="width: 100px; height: 100px; object-fit: cover;">
                                 <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
                                     style="height: 100px;">
                                     <div class="mb-1" style="font-size: 13px;">
-                                        <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                        <a
+                                            href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
                                         <span class="px-1">/</span>
                                         <span><?php
                                         // Ambil waktu yang disimpan di MongoDB (dalam UTC)
@@ -146,7 +151,7 @@ include 'page/header-user.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="news_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
-                                        <small>
+                                    <small>
                                         <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
                                     </small>
                                 </div>
@@ -206,4 +211,4 @@ include 'page/header-user.php';
 
 <?php
 include 'page/footer-user.php';
-?> 
+?>

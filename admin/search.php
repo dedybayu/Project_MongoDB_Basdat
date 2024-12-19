@@ -8,7 +8,7 @@ if ($keyword === '') {
 }
 $cursor = $newsCollection->find(
     ['title' => ['$regex' => $keyword, '$options' => 'i']],
-    ['projection' => ['title' => 1, 'summary' => 1, 'created_at' => 1, 'category' => 1, 'image' => 1]]
+    ['projection' => ['title' => 1, 'summary' => 1, 'created_at' => 1, 'category' => 1, 'image' => 1, 'jumlah_views' => 1]]
 );
 
 $results = iterator_to_array($cursor);
@@ -74,6 +74,9 @@ include 'page/header-admin.php';
                                         <a class="h4"
                                             href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
                                         <p class="m-0"><?= $article['summary'] ?> </p>
+                                        <small>
+                                            <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                        </small>
                                     </div>
                                 </div>
                             </div>
@@ -122,6 +125,9 @@ include 'page/header-admin.php';
                                     </div>
                                     <a class="h6 m-0"
                                         href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                    <small>
+                                        <i>Views: <?= nl2br(htmlspecialchars($article['jumlah_views'])) ?></i>
+                                    </small>
                                 </div>
                             </div>
                         <?php endforeach; ?>
