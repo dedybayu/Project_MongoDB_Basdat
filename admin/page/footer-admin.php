@@ -30,7 +30,7 @@
 <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="../js/script-user.js"></script>
+<script src="../js/script-user-admin.js"></script>
 </body>
 
 </html>

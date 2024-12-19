@@ -30,7 +30,7 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style-user.css" rel="stylesheet">
+    <link href="css/style-user-admin.css" rel="stylesheet">
 </head>
 
 <body>
