@@ -25,7 +25,8 @@ include 'page/header-user.php';
             <nav class="breadcrumb bg-transparent m-0 p-0">
                 <a class="breadcrumb-item" href="index.php">Home</a>
     
-                <span class="breadcrumb-item active">Kategori <?= $category ?></span>
+                <span class="breadcrumb-item active">Kategori</span>
+                <span class="breadcrumb-item active"> <?= $category ?></span>
             </nav>
         </div>
     </div>

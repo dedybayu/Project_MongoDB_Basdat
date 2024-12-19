@@ -100,6 +100,42 @@ db.createCollection("users", {
     }
 });
 
+javascript
+db.createCollection("notifications", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["message", "created_at"],
+            properties: {
+                message: {
+                    bsonType: "string",
+                    description: "Notification message is required and must be a string."
+                },
+                created_at: {
+                    bsonType: "date",
+                    description: "Creation timestamp is required."
+                },
+                is_read: {
+                    bsonType: "bool",
+                    description: "Indicates if the notification is read."
+                }
+            }
+        }
+    }
+});
+
+db.news.aggregate([
+    {
+        $group: {
+            _id: "$category",
+            total_views: { $sum: "$jumlah_views" }
+        }
+    },
+    {
+        $sort: { total_views: -1 } 
+    }
+]);
+
 
 
 

@@ -5,6 +5,48 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+ .notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notification {
+  display: block;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f8f8f8;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.notification:hover {
+  background-color: #e2e2e2;
+  text-decoration: underline;
+}
+
+
+#notification-list {
+  position: absolute;
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#notification-list .dropdown-item {
+  margin-bottom: 5px;
+}
+
+#notification-button .badge {
+  font-size: 0.8em;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

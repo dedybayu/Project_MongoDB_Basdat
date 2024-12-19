@@ -72,7 +72,7 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
-                <div class="col-lg-1"></div>
+                <div class="px-4"></div>
                 <div class="navbar-nav mr-auto py-0" id="navbar">
                     <a href="dashboard.php" class="nav-item nav-link  ">Home</a>
                     <a href="trending.php" class="nav-item nav-link">Trending</a>
@@ -96,16 +96,17 @@ $news = $newsCollection->find([], ['sort' => ['created_at' => -1]]);
                 </div>
 
                 <script>
-                    // Tunggu sampai seluruh konten DOM selesai dimuat
-                    document.addEventListener('DOMContentLoaded', () => {
-                        // mengammbil semua elemen dengan kelas 'nav-link'
+                 // Tunggu sampai seluruh konten DOM selesai dimuat
+                 document.addEventListener('DOMContentLoaded', () => {
+                        // Mengambil semua elemen dengan kelas 'nav-link'
                         const links = document.querySelectorAll('.nav-link');
-                        const currentPath = window.location.pathname; // Ambil path saat ini
+                        const currentLocation = window.location.href; // Ambil URL lengkap saat ini
 
-                        // memeriksa setiap tautan untuk menyesuaikan dengan URL saat ini
+                        // Memeriksa setiap tautan untuk menyesuaikan dengan URL saat ini
                         links.forEach(link => {
-                            //  href tautan sesuai dengan URL saat ini (path atau URL penuh), menambahkan kelas 'active'
-                            if (link.getAttribute('href') === currentPath || currentPath.includes(link.getAttribute('href'))) {
+                            const linkHref = link.getAttribute('href'); // Mendapatkan href dari link
+                            // Menambahkan kelas 'active' jika URL saat ini sesuai dengan href link
+                            if (currentLocation.includes(linkHref)) {
                                 link.classList.add('active');
                             } else {
                                 link.classList.remove('active');

@@ -42,6 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'image' => $imageData ? new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC) : null // Simpan binary data atau null
     ]);
 
+    // Insert data notifikasi ke dalam collection
+    $notificationsCollection->insertOne([
+        'message' => "Berita baru berjudul '{$_POST['title']}' telah ditambahkan.",
+        'status' => 'unread',
+        'created_at' => $mongoDate
+    ]);
+
     // Redirect ke halaman manajemen berita setelah menyimpan
     header('Location: manage_news.php');
     exit;
