@@ -171,29 +171,45 @@ include 'page/header-admin.php';
                     </div>
                     <!-- News Detail End -->
 
-                    <!-- Comment List Start -->
-                    <div class="bg-light mb-3" style="padding: 30px;">
-                        <h3 class="mb-3"><?= count($comments) ?> Komentar</h3>
-                        <?php if (count($comments) == 0): ?>
+                    
+                     <!-- Comment List Start -->
+<div class="bg-light mb-3" style="padding: 30px;">
+    <h3 class="mb-3">
+        <?= isset($comments) ? count($comments) : 0 ?> Komentar
+                        </h3>
+                        <?php if (empty($comments) || count($comments) === 0): ?>
                             <p>Belum ada komentar.</p>
                         <?php else: ?>
                             <?php foreach ($comments as $comment): ?>
                                 <div class="media mb-2">
-                                    <img src="assets/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <img src="../assets/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                     <div class="media-body">
                                         <h6 class="d-flex justify-content-between">
-                                            <a href="">Anonim</a>
+                                            <a href="#">Anonim</a>
                                             <small class="text-end">
                                                 <i>Ditambahkan pada:
                                                     <?php
-                                                    $createdAt = $comment['created_at']->toDateTime();
-                                                    $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                                                    echo $createdAt->format('d-m-Y H:i');
+                                                    if (isset($comment['created_at'])) {
+                                                        $createdAt = $comment['created_at']->toDateTime();
+                                                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                                        echo $createdAt->format('d-m-Y H:i');
+                                                    } else {
+                                                        echo 'Tanggal tidak tersedia';
+                                                    }
                                                     ?>
                                                 </i>
                                             </small>
                                         </h6>
-                                        <p><?= htmlspecialchars($comment['comment']) ?></p>
+                                        <p>
+                                            <?= isset($comment['comment']) ? htmlspecialchars($comment['comment']) : 'Komentar tidak tersedia' ?>
+                                        </p>
+                                        <div class="d-flex justify-content-end">
+                                            <a href="edit_news.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>"
+                                                class="btn btn-sm btn-warning mr-2">Edit</a>
+                                            <a href="delete_news.php?id=<?= isset($comment['_id']) ? $comment['_id'] : '#' ?>"
+                                                class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?');">Hapus</a>
+                                        </div>
                                         <hr>
                                     </div>
                                 </div>
@@ -201,7 +217,6 @@ include 'page/header-admin.php';
                         <?php endif; ?>
                     </div>
                     <!-- Comment List End -->
-
 
                     <!-- Comment Form Start -->
                     <div class="bg-light mb-3" style="padding: 30px;">
