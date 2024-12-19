@@ -23,9 +23,10 @@ include 'page/header-admin.php';
     <div class="container-fluid col-lg-8">
         <div class="container">
             <nav class="breadcrumb bg-transparent m-0 p-0">
-                <a class="breadcrumb-item" href="dashboard.php">Home</a>
+                <a class="breadcrumb-item" href="index.php">Home</a>
     
-                <span class="breadcrumb-item active">Kategori <?= $category ?></span>
+                <span class="breadcrumb-item active">Kategori</span>
+                <span class="breadcrumb-item active"> <?= $category ?></span>
             </nav>
         </div>
     </div>
@@ -46,37 +47,36 @@ include 'page/header-admin.php';
                         
                         <?php
                         if (count($results) === 0) {
-
+                            
                             echo "<div class='col-lg-12'><p class='text-center mt-5'>Maaf tidak ada hasil pencarian untuk kategori '" . htmlspecialchars($category) . "'</p></div>";
-
+                            
                         } else {
                             foreach ($results as $article): ?>
-                                        <div class="col-lg-6">
-                                            <div class="position-relative mb-3">
-                                            <img class="img-fluid w-100" src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" style="object-fit: cover; width: 500px; height: 280px;"> 
-                                                <div class="overlay position-relative bg-light">
-                                                    <div class="mb-2" style="font-size: 14px;">
-                                                        <a href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
-                                                        <span class="px-1">/</span>
-                                                        <a><?php
-                                                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                                                        $createdAt = $article['created_at']->toDateTime();
+                                <div class="col-lg-6">
+                                    <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>" style="object-fit: cover; width: 500px; height: 280px;"> 
+                                        <div class="overlay position-relative bg-light">
+                                            <div class="mb-2" style="font-size: 14px;">
+                                                <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                                                <span class="px-1">/</span>
+                                                <a><?php
+                                                // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                                                $createdAt = $article['created_at']->toDateTime();
 
-                                                        // Set zona waktu ke WIB (Asia/Jakarta)
-                                                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                                // Set zona waktu ke WIB (Asia/Jakarta)
+                                                $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-                                                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                                                        echo $createdAt->format('d-m-Y');
-                                                        ?></a>
-                                                    </div>
-                                                    <a class="h4" href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
-                                                    <p class="m-0"><?= $article['summary'] ?> </p>
-                                                </div>
+                                                // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                                                echo $createdAt->format('d-m-Y');
+                                                ?></a>
                                             </div>
+                                            <a class="h4" href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                                            <p class="m-0"><?= $article['summary'] ?> </p>
                                         </div>
+                                    </div>
+                                </div>
 
-                            <?php endforeach;
-                        } ?>
+                        <?php endforeach; } ?>
                     </div>
           
                 </div>
@@ -97,28 +97,28 @@ include 'page/header-admin.php';
     <!-- Tambahkan container dengan scrolling -->
     <div style="max-height: 400px; overflow-y: auto;">
         <?php foreach ($newsTrending as $article): ?>
-                <div class="d-flex mb-3">
-                    <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
-                        style="width: 100px; height: 100px; object-fit: cover;">
-                    <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
-                        style="height: 100px;">
-                        <div class="mb-1" style="font-size: 13px;">
-                            <a href="view_kategori.php?category=<?= $article['category'] ?>"><?php echo $article['category']; ?></a>
-                            <span class="px-1">/</span>
-                            <span><?php
-                            // Ambil waktu yang disimpan di MongoDB (dalam UTC)
-                            $createdAt = $article['created_at']->toDateTime();
+            <div class="d-flex mb-3">
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']->getData()) ?>"
+                    style="width: 100px; height: 100px; object-fit: cover;">
+                <div class="w-75 d-flex flex-column justify-content-center bg-light px-3"
+                    style="height: 100px;">
+                    <div class="mb-1" style="font-size: 13px;">
+                        <a href="view_kategori.php?category=<?= $article['category']?>"><?php echo $article['category']; ?></a>
+                        <span class="px-1">/</span>
+                        <span><?php
+                        // Ambil waktu yang disimpan di MongoDB (dalam UTC)
+                        $createdAt = $article['created_at']->toDateTime();
 
-                            // Set zona waktu ke WIB (Asia/Jakarta)
-                            $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                        // Set zona waktu ke WIB (Asia/Jakarta)
+                        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta'));
 
-                            // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
-                            echo $createdAt->format('d-m-Y');
-                            ?></span>
-                        </div>
-                        <a class="h6 m-0" href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
+                        // Tampilkan waktu dalam format yang diinginkan (d-m-Y H:i)
+                        echo $createdAt->format('d-m-Y');
+                        ?></span>
                     </div>
+                    <a class="h6 m-0" href="view_detail.php?id=<?= $article['_id'] ?>"><?= $article['title'] ?></a>
                 </div>
+            </div>
         <?php endforeach; ?>
     </div>
 </div>
