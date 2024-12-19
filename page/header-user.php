@@ -60,12 +60,12 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
 
                     <!-- Dropdown untuk notifikasi -->
                     <div id="notification-list" class="dropdown-menu dropdown-menu-left mt-2 p-2"
-                        style="display: none;">
+                        style="display: none; width: 390px;">
                         <div id="notification-content">
                             <?php foreach ($notifications as $notification): ?>
                                 <div class="dropdown-item bg-light mb-2 rounded p-2"
                                     id="notification-<?= $notification['_id'] ?>">
-                                    <p><?= $notification['message'] ?></p>
+                                    <p class="notification-message"><?= $notification['message'] ?></p>
                                     <small
                                         class="text-muted"><?= $notification['created_at']->toDateTime()->format('d M Y, H:i') ?></small>
                                     <button class="btn btn-danger btn-sm float-right delete-notification"
@@ -74,6 +74,20 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
                             <?php endforeach; ?>
                         </div>
                     </div>
+
+                    <style>
+                        .notification-message {
+                            white-space: normal;
+                            /* Allow text to wrap */
+                            word-wrap: break-word;
+                            /* Break long words */
+                            overflow: hidden;
+                            /* Hide overflow */
+                            text-overflow: ellipsis;
+                            /* Add ellipsis if text overflows */
+                        }
+                    </style>
+
 
                 </div>
 
