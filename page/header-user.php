@@ -62,20 +62,26 @@ $recentNotifications = $notificationsCollection->find([], ['sort' => ['created_a
 
                     <!-- Dropdown untuk notifikasi -->
                     <div id="notification-list" class="dropdown-menu dropdown-menu-left mt-2 p-2"
-                        style="display: none; width: 390px;">
-                        <div id="notification-content">
-                            <?php foreach ($notifications as $notification): ?>
-                                <div class="dropdown-item bg-light mb-2 rounded p-2"
-                                    id="notification-<?= $notification['_id'] ?>">
-                                    <p class="notification-message"><?= $notification['message'] ?></p>
-                                    <small
-                                        class="text-muted"><?= $notification['created_at']->toDateTime()->format('d M Y, H:i') ?></small>
-                                    <button class="btn btn-danger btn-sm float-right delete-notification"
-                                        data-id="<?= $notification['_id'] ?>">Delete</button>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
+    style="display: none; width: 390px;">
+    <div id="notification-content">
+        <?php if (!empty($notifications)): ?>
+            <?php foreach ($notifications as $notification): ?>
+                <div class="dropdown-item bg-light mb-2 rounded p-2"
+                    id="notification-<?php echo htmlspecialchars($notification['_id']); ?>">
+                    <p class="notification-message"><?php echo htmlspecialchars($notification['message']); ?></p>
+                    <small class="text-muted">
+                        <?php echo htmlspecialchars($notification['created_at']->toDateTime()->format('d M Y, H:i')); ?>
+                    </small>
+                    <button class="btn btn-danger btn-sm float-right delete-notification"
+                        data-id="<?php echo htmlspecialchars($notification['_id']); ?>">Delete</button>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="text-muted text-center">No notifications available</p>
+        <?php endif; ?>
+    </div>
+</div>
+
 
                     <style>
                         .notification-message {
