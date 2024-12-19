@@ -192,30 +192,31 @@ $notifications = $notificationsCollection->find([], ['sort' => ['created_at' => 
 
     // Ambil notifikasi terbaru
     fetch('get_notification.php')
-        .then(response => response.json())
-        .then(notifications => {
-            const notificationContent = document.getElementById('notification-content');
-            notificationContent.innerHTML = ''; // Hapus konten lama
+    .then(response => response.json())
+    .then(notifications => {
+        const notificationContent = document.getElementById('notification-content');
 
-            // Masukkan notifikasi baru ke dalam daftar
-            if (notifications.length > 0) {
-                notifications.forEach(notification => {
-                    const notificationItem = document.createElement('div');
-                    notificationItem.classList.add('dropdown-item', 'bg-light', 'mb-2', 'rounded', 'p-2');
-                    notificationItem.innerHTML = `
-                        <p>${notification.message}</p>
-                        <small class="text-muted">${notification.created_at}</small>
-                    `;
-                    notificationContent.appendChild(notificationItem);
-                });
-            } else {
-                const emptyMessage = document.createElement('p');
-                emptyMessage.classList.add('text-muted');
-                emptyMessage.textContent = 'Tidak ada notifikasi baru';
-                notificationContent.appendChild(emptyMessage);
-            }
-        });
-}, 3000); // Interval setiap 5 detik
+        // Masukkan notifikasi baru ke dalam daftar, di bagian atas
+        if (notifications.length > 0) {
+            notifications.forEach(notification => {
+                const notificationItem = document.createElement('div');
+                notificationItem.classList.add('dropdown-item', 'bg-light', 'mb-2', 'rounded', 'p-2');
+                notificationItem.innerHTML = `
+                    <p>${notification.message}</p>
+                    <small class="text-muted">${notification.created_at}</small>
+                `;
+                // Menambahkan notifikasi baru di atas daftar
+                notificationContent.prepend(notificationItem);
+            });
+        } else {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.classList.add('text-muted');
+            emptyMessage.textContent = 'Tidak ada notifikasi baru';
+            notificationContent.appendChild(emptyMessage);
+        }
+    });
+}, 3000); // Interval setiap 3 detik
+
 
                 </script>
 
